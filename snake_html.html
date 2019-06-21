@@ -1,0 +1,41 @@
+<html>
+<head>
+    
+</head>
+<body>
+<canvas id = "mycanvas" width = "500px" height ="500px" style = "border: 1px solid">
+pls show the deatails
+</canvas>
+<script>
+    var ele =  document.getElementById('mycanvas');
+    if (ele && ele.getContext){
+    var context = ele.getContext('2d');
+    var k=0
+    if(context){
+      //context.fillStyle = '#ffffff';
+      //context.fillStroke = '#f00';
+      k=context.fillRect(30,150,20,20);
+      context.fillRect(52,150,20,20);
+      context.fillRect(74,150,20,20);
+      context.fillRect(96,150,20,20);
+      context.fillRect(250,80,20,20);
+      context.fillRect(0,0,20,20);
+      context.fillRect(22,0,20,20);
+      context.fillRect(0,22,20,20);
+      context.fillRect(0,44,20,20);
+      context.fillRect(480,480,20,20);
+      context.fillRect(480,458,20,20);
+      context.fillRect(458,480,20,20);
+      //context.fillStroke(10,39,49,110);
+      }
+    }
+    // position = 
+    console.log(k);
+    if (window.console && window.console.log){
+      console.log(JSON.parse(JSON.stringify(k)));
+    }
+    
+    // <p>position</p>
+</script>
+</body>
+</html>

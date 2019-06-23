@@ -11,31 +11,64 @@ pls show the deatails
     if (ele && ele.getContext){
     var context = ele.getContext('2d');
     var k=0
+    var x = 30;
+    var y = 150;
+    var width = 20;
+    var height = 20;
     if(context){
       //context.fillStyle = '#ffffff';
       //context.fillStroke = '#f00';
-      k=context.fillRect(30,150,20,20);
-      context.fillRect(52,150,20,20);
-      context.fillRect(74,150,20,20);
-      context.fillRect(96,150,20,20);
-      context.fillRect(250,80,20,20);
-      context.fillRect(0,0,20,20);
-      context.fillRect(22,0,20,20);
-      context.fillRect(0,22,20,20);
-      context.fillRect(0,44,20,20);
-      context.fillRect(480,480,20,20);
-      context.fillRect(480,458,20,20);
-      context.fillRect(458,480,20,20);
+      //context.fillRect(30,150,20,20);
+      context.fillRect(x,y,width,height)
+      // context.fillRect(52,150,20,20);
+      // context.fillRect(74,150,20,20);
+      // context.fillRect(96,150,20,20);
+      // context.fillRect(250,80,20,20);
+      // context.fillRect(0,0,20,20);
+      // context.fillRect(22,0,20,20);
+      // context.fillRect(0,22,20,20);
+      // context.fillRect(0,44,20,20);
+      // context.fillRect(480,480,20,20);
+      // context.fillRect(480,458,20,20);
+      // context.fillRect(458,480,20,20);
       //context.fillStroke(10,39,49,110);
       }
     }
     // position = 
-    console.log(k);
-    if (window.console && window.console.log){
-      console.log(JSON.parse(JSON.stringify(k)));
+    //console.log(k);
+    // if (window.console && window.console.log){
+    //   // var event = window.event ? window.event : e;
+    //   // cosole.log(event.keyCode);
+    //   //console.log('there are some problems are there');
+    // }
+
+    document.onkeydown = keyMovements;
+   
+    function keyMovements(e){
+      e = e || window.event;
+      if (e.keyCode == '38'){
+        console.log('up arrow key is pressed');
+        //move = setInterval(upMovement,1000);
+        while(e.keyCode == '38'){
+        setTimeout(upMovement,1000);
+        }
+      }
+      else if (e.keyCode == '40'){
+        console.log('down arrow key is pressed'); 
+      }
+      else if (e.keyCode == '37'){
+        console.log('left arrow key is pressed');
+      }
+      else if(e.keyCode == '39'){
+        console.log('right arrow key is pressed');
+      }
+     
+     function upMovement(){
+       context.fillRect(x+50,y,width,height)
+     }
+     
     }
-    
-    // <p>position</p>
+
 </script>
 </body>
 </html>

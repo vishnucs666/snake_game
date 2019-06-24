@@ -42,29 +42,76 @@ pls show the deatails
     //   //console.log('there are some problems are there');
     // }
 
-    document.onkeydown = keyMovements;
-   
-    function keyMovements(e){
+    document.onkeydown = keyMovements;     
+    function keyMovements(e){   
       e = e || window.event;
-      if (e.keyCode == '38'){
-        console.log('up arrow key is pressed');
-        //move = setInterval(upMovement,1000);
-        while(e.keyCode == '38'){
-        setTimeout(upMovement,1000);
-        }
-      }
-      else if (e.keyCode == '40'){
-        console.log('down arrow key is pressed'); 
-      }
-      else if (e.keyCode == '37'){
+      if (e.keyCode == '37'){
         console.log('left arrow key is pressed');
+        leftmove = setInterval(leftMovement,500);
+        clearInterval(downmove)
+        clearInterval(upmove)
+        clearInterval(rightmove)
+      }
+      else if (e.keyCode == '38'){
+        upmove = setInterval(upMovement,500);
+        clearInterval(rightmove)
+        clearInterval(leftmove)
+        clearInterval(downmove)
+        
       }
       else if(e.keyCode == '39'){
         console.log('right arrow key is pressed');
+        rightmove = setInterval(rightMovement,500)
+        clearInterval(downmove)
+        clearInterval(upmove)
+        clearInterval(leftmove)
       }
+      else if (e.keyCode == '40'){
+        console.log('down arrow key is pressed');
+        downmove = setInterval(downMovement,500);
+        clearInterval(upmove)
+        clearInterval(leftmove)
+        clearInterval(rightmove)
+      }
+      
+      
      
-     function upMovement(){
-       context.fillRect(x+50,y,width,height)
+      function upMovement(){
+        context.fillRect(x,y-20,width,height)
+        context.clearRect(x,y,width,height)
+        y=y-20;
+        if (y == -30){
+          window.alert("game ends here")
+        }
+       return;
+      }
+
+     function downMovement(){
+       context.fillRect(x,y+20,width,height)
+       context.clearRect(x,y,width,height)
+       y=y+20;
+       if (y==510){
+         window.alert('the game ends here')
+       }
+       return;
+     }
+     function leftMovement(){
+       context.fillRect(x-20,y,width,height)
+       context.clearRect(x,y,width,height)
+       x=x-20;
+       if(x==-30){
+         window.alert('game ends here');
+       }
+       return;
+     }  
+     function rightMovement(){
+       context.fillRect(x+20,y,width,height)
+       context.clearRect(x,y,width,height)
+       x=x+20;
+       if(x == 510){
+         window.alert('game ends')
+       }
+       return;
      }
      
     }

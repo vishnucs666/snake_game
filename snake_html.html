@@ -34,48 +34,81 @@ pls show the deatails
       //context.fillStroke(10,39,49,110);
       }
     }
-    // position = 
-    //console.log(k);
-    // if (window.console && window.console.log){
-    //   // var event = window.event ? window.event : e;
-    //   // cosole.log(event.keyCode);
-    //   //console.log('there are some problems are there');
-    // }
-
+    var flag_upmovement = 0;
+    var flag_downmovement = 0;
+    var flag_leftmovement = 0;
+    var flag_rightmovement = 0;
     document.onkeydown = keyMovements;     
     function keyMovements(e){   
       e = e || window.event;
       if (e.keyCode == '37'){
         console.log('left arrow key is pressed');
         leftmove = setInterval(leftMovement,500);
-        clearInterval(downmove)
-        clearInterval(upmove)
-        clearInterval(rightmove)
+        flag_leftmovement =1;
+        if (flag_downmovement == 1){
+           clearInterval(downmove);
+           flag_downmovement =0;
+        }
+        if (flag_upmovement == 1){
+           clearInterval(upmove);
+           flag_upmovement = 0;
+        }
+        if (flag_rightmovement == 1){
+          clearInterval(rightmove);
+          flag_rightmovement = 0;
+        }
       }
       else if (e.keyCode == '38'){
         upmove = setInterval(upMovement,500);
-        clearInterval(rightmove)
-        clearInterval(leftmove)
-        clearInterval(downmove)
-        
+        flag_upmovement= 1;
+        if (flag_rightmovement ==1){
+          clearInterval(rightmove);
+          flag_rightmovement = 0;
+        }
+        if (flag_leftmovement == 1){
+          clearInterval(leftmove);
+          flag_leftmovement = 0;
+        }
+        if (flag_downmovement == 1){
+           clearInterval(downmove);
+           flag_downmovement = 0;
+        }
       }
       else if(e.keyCode == '39'){
         console.log('right arrow key is pressed');
-        rightmove = setInterval(rightMovement,500)
-        clearInterval(downmove)
-        clearInterval(upmove)
-        clearInterval(leftmove)
+        rightmove = setInterval(rightMovement,500);
+        flag_rightmovement = 1;
+        if (flag_downmovement == 1) {
+           clearInterval(downmove);
+           flag_downmovement = 0;
+        }
+        if (flag_upmovement == 1){
+          clearInterval(upmove);
+          flag_upmovement = 0;
+        }
+        if (flag_leftmovement == 1){
+          clearInterval(leftmove);
+          flag_leftmovement = 0;
+        }
+        
       }
       else if (e.keyCode == '40'){
         console.log('down arrow key is pressed');
         downmove = setInterval(downMovement,500);
-        clearInterval(upmove)
-        clearInterval(leftmove)
-        clearInterval(rightmove)
-      }
-      
-      
-     
+        flag_downmovement = 1;
+        if (flag_upmovement == 1){
+          clearInterval(upmove);
+        }
+        if (flag_leftmovement == 1){
+          clearInterval(leftmove);
+          flag_leftmovement = 0;
+        }
+        if (flag_rightmovement == 1){
+          clearInterval(rightmove);
+          flag_rightmovement = 0;
+        }
+        
+      }     
       function upMovement(){
         context.fillRect(x,y-20,width,height)
         context.clearRect(x,y,width,height)

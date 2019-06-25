@@ -15,6 +15,8 @@ pls show the deatails
     var y = 150;
     var width = 20;
     var height = 20;
+    var food_x =90 ;
+    var food_y =90 ;
     if(context){
       //context.fillStyle = '#ffffff';
       //context.fillStroke = '#f00';
@@ -41,6 +43,7 @@ pls show the deatails
     document.onkeydown = keyMovements;     
     function keyMovements(e){   
       e = e || window.event;
+      timeoutId = setTimeout(food,100)
       if (e.keyCode == '37'){
         console.log('left arrow key is pressed');
         leftmove = setInterval(leftMovement,500);
@@ -109,10 +112,38 @@ pls show the deatails
         }
         
       }     
+
+      function food(){
+        context.fillRect(food_x,food_y,width,height)
+        return
+      }
+      var food=0;
       function upMovement(){
-        context.fillRect(x,y-20,width,height)
-        context.clearRect(x,y,width,height)
-        y=y-20;
+        if (x == food_x && y-20 == food_y){
+          context.clearRect(food_x,food_y,width,height);
+          context.clearRect(x,y,width,height);
+          context.fillRect(x,y-20,width,height);
+          context.fillRect(x,y,width,height);
+          //context.fillRect(x,y-60,width,height)
+          //height = height + 20 ;
+          y= y+20
+          console.log('the value')
+          console.log(y)
+         //clearTimeout(timeoutId)
+        }
+        else{
+          // if (food != 1)
+          // {
+          context.clearRect(x,y,width,height);
+          console.log('the y value')
+          console.log(y)
+          console.log('*******')
+          context.fillRect(x,y-20,width,height);
+          console.log('else case')
+          console.log('***********')
+          y=y-20;
+          //}
+        }
         if (y == -30){
           window.alert("game ends here")
         }
@@ -120,9 +151,16 @@ pls show the deatails
       }
 
      function downMovement(){
+       if (width > 20)
+       {
+        context.fillRect(x,y+20,width-20,height+20)
+        context.clearRect(x,y,width,height)
+       }
+       else{
        context.fillRect(x,y+20,width,height)
        context.clearRect(x,y,width,height)
        y=y+20;
+       }
        if (y==510){
          window.alert('the game ends here')
        }
@@ -138,9 +176,20 @@ pls show the deatails
        return;
      }  
      function rightMovement(){
+       if (height>20){
+         context.fillRect(x+20,y,width+20,height-20)
+         context.clearRect(x,y,width,height)
+         console.log('height is increased')
+         console.log(y)
+         x=x+20;
+         width = width + 20;
+         clearTimeout(timeoutId)
+       }
+       else{
        context.fillRect(x+20,y,width,height)
        context.clearRect(x,y,width,height)
        x=x+20;
+       }
        if(x == 510){
          window.alert('game ends')
        }

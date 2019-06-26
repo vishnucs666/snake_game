@@ -13,7 +13,8 @@ pls show the deatails
     var k=0
     var x = 30;
     var y = 150;
-    var width = 20;
+    //var y = 200;
+    var width = 60;
     var height = 20;
     var food_x =90 ;
     var food_y =90 ;
@@ -30,7 +31,7 @@ pls show the deatails
       // context.fillRect(22,0,20,20);
       // context.fillRect(0,22,20,20);
       // context.fillRect(0,44,20,20);
-      // context.fillRect(480,480,20,20);
+      // context.fillRect (480,480,20,20);
       // context.fillRect(480,458,20,20);
       // context.fillRect(458,480,20,20);
       //context.fillStroke(10,39,49,110);
@@ -43,7 +44,11 @@ pls show the deatails
     document.onkeydown = keyMovements;     
     function keyMovements(e){   
       e = e || window.event;
-      timeoutId = setTimeout(food,100)
+      //timeoutId = setTimeout(food,500)
+      function food(){
+        context.fillRect(food_x,food_y,width,height)
+        return
+      }
       if (e.keyCode == '37'){
         console.log('left arrow key is pressed');
         leftmove = setInterval(leftMovement,500);
@@ -113,37 +118,45 @@ pls show the deatails
         
       }     
 
-      function food(){
-        context.fillRect(food_x,food_y,width,height)
-        return
-      }
-      var food=0;
+      var food=-20;
+      var g = 40;
+      var k=-40;
+      var r = 0;
       function upMovement(){
-        if (x == food_x && y-20 == food_y){
-          context.clearRect(food_x,food_y,width,height);
-          context.clearRect(x,y,width,height);
-          context.fillRect(x,y-20,width,height);
-          context.fillRect(x,y,width,height);
-          //context.fillRect(x,y-60,width,height)
-          //height = height + 20 ;
-          y= y+20
-          console.log('the value')
-          console.log(y)
-         //clearTimeout(timeoutId)
-        }
-        else{
-          // if (food != 1)
-          // {
-          context.clearRect(x,y,width,height);
-          console.log('the y value')
-          console.log(y)
-          console.log('*******')
-          context.fillRect(x,y-20,width,height);
+        // if (x == food_x && y-20 == food_y){
+        //   height = height + 20 ;
+        //   y= y-20
+        //   clearTimeout(timeoutId)
+        // }
+        // else{
+          console.log('up arrow key movement')
+          if (width > 20){
+          console.log('the x value')
+          console.log(x)
+          console.log('******')
+          context.clearRect(x+k,y+r,width,height);
+          //context.clearRect(x,y,width-20,height)
+          context.fillRect(x+40,y-20,width-g,height+20);
+          width = width - 20
+          y = y - 20
+          r = 20
+          g = g - 20
+          height = height + 20
+          k= 0;
+          console.log('the height')
+          console.log(height)
+          console.log('******')
+          }
+          else {
+            context.clearRect(x+40,y,width,height)
+            context.fillRect(x+40,y-20,width,height);
+            y=y-20;
+          }
+          //context.clearRect(x+20,y,width-20,height);
+          //context.fillRect(x+40,y-20,width-40,height+20);         
+          food = food+20;
           console.log('else case')
           console.log('***********')
-          y=y-20;
-          //}
-        }
         if (y == -30){
           window.alert("game ends here")
         }
@@ -151,16 +164,23 @@ pls show the deatails
       }
 
      function downMovement(){
-       if (width > 20)
-       {
-        context.fillRect(x,y+20,width-20,height+20)
-        context.clearRect(x,y,width,height)
-       }
-       else{
+      //  if ( width > 20){
+      //    context.clearRect(x,y,width-20,height)
+      //    if (width>0){
+      //      width = width - 20;
+      //      height = height + 20; 
+      //    }
+      //    console.log('width')
+      //    console.log(width)
+      //    console.log('*******')
+      //    context.fillRect(x,y+20,width,height)
+      //    y=y+20;
+      //  }
+      //  else{
        context.fillRect(x,y+20,width,height)
        context.clearRect(x,y,width,height)
        y=y+20;
-       }
+       //}
        if (y==510){
          window.alert('the game ends here')
        }
@@ -176,20 +196,37 @@ pls show the deatails
        return;
      }  
      function rightMovement(){
-       if (height>20){
-         context.fillRect(x+20,y,width+20,height-20)
-         context.clearRect(x,y,width,height)
-         console.log('height is increased')
-         console.log(y)
-         x=x+20;
-         width = width + 20;
-         clearTimeout(timeoutId)
-       }
-       else{
-       context.fillRect(x+20,y,width,height)
-       context.clearRect(x,y,width,height)
-       x=x+20;
-       }
+      //  if (height>20){
+      //   context.clearRect(x,y,width,height)
+      //   if (height > 0){
+      //       width = width + 20;
+      //       height = height - 20;
+      //   }
+      //  context.fillRect(x+20,y,width,height)
+         
+      //  console.log('height is increased')
+      //  console.log(y)
+      //  x=x+20;
+      //   //  console.log('width')
+      //   //  console.log(width)
+      //   //  console.log('**********')
+      //   //  console.log('height')
+      //   //  console.log(height)
+      //   //  console.log('**********')
+      //    clearTimeout(timeoutId)
+      //  }
+      //  else{
+        if (height>20){
+          
+        }
+        else
+        {
+          context.clearRect(x,y,width,height)
+          context.fillRect(x+20,y,width,height)
+          console.log('hai')
+          x=x+20;
+        }
+       //}
        if(x == 510){
          window.alert('game ends')
        }

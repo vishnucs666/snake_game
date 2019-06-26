@@ -122,6 +122,7 @@ pls show the deatails
       var g = 40;
       var k=-40;
       var r = 0;
+      flag_check = 0;
       function upMovement(){
         // if (x == food_x && y-20 == food_y){
         //   height = height + 20 ;
@@ -135,21 +136,26 @@ pls show the deatails
           console.log(x)
           console.log('******')
           context.clearRect(x+k,y+r,width,height);
-          //context.clearRect(x,y,width-20,height)
           context.fillRect(x+40,y-20,width-g,height+20);
           width = width - 20
+          height = height + 20
           y = y - 20
           r = 20
           g = g - 20
-          height = height + 20
           k= 0;
+          flag_check = 1;
           console.log('the height')
           console.log(height)
           console.log('******')
           }
           else {
-            context.clearRect(x+40,y,width,height)
-            context.fillRect(x+40,y-20,width,height);
+            if (flag_check == 1)
+            {
+            x=  height - 20+x;
+            flag_check = 0;
+            }
+            context.clearRect(x,y,width,height)
+            context.fillRect(x,y-20,width,height);
             y=y-20;
           }
           //context.clearRect(x+20,y,width-20,height);
@@ -195,32 +201,42 @@ pls show the deatails
        }
        return;
      }  
+     var length = 40;
+     var decrementar = 40;
+     var width_finder = 0;
+     var limit = 0;
+     var index = 20;
+     var flag_check = 0;
      function rightMovement(){
-      //  if (height>20){
-      //   context.clearRect(x,y,width,height)
-      //   if (height > 0){
-      //       width = width + 20;
-      //       height = height - 20;
-      //   }
-      //  context.fillRect(x+20,y,width,height)
-         
-      //  console.log('height is increased')
-      //  console.log(y)
-      //  x=x+20;
-      //   //  console.log('width')
-      //   //  console.log(width)
-      //   //  console.log('**********')
-      //   //  console.log('height')
-      //   //  console.log(height)
-      //   //  console.log('**********')
-      //    clearTimeout(timeoutId)
-      //  }
-      //  else{
+
         if (height>20){
-          
+          context.clearRect(x-limit,y+length,width-width_finder,height-decrementar)
+          height = height - 20;
+          decrementar = decrementar - 40;
+          context.fillRect(x+20,y,width-limit,height-index)
+          width = width + 20; 
+          width_finder = 20;
+          length = length - 20;  
+          console.log('y value')
+          console.log(y)
+          console.log('*********')
+          x= x+20;       
+          limit = limit + 20;
+          flag_check = 1;
+          index = index -20;
+          console.log('width')
+          console.log(width)
+          console.log('*******')
         }
         else
         {
+          if (flag_check == 1){
+            x = x-width;
+            flag_check = 0;
+          }
+          console.log('******width*******')
+          console.log(width)
+          console.log('**************')
           context.clearRect(x,y,width,height)
           context.fillRect(x+20,y,width,height)
           console.log('hai')

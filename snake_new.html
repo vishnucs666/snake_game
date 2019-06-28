@@ -51,81 +51,74 @@ pls show the deatails
     var flag_downmovement = 0;
     var flag_leftmovement = 0;
     var flag_rightmovement = 0;
+    var limit = 0;
+    var left_move;
+    var right_move;
+    var up_move;
+    var down_move;
+    var key;
     document.onkeydown = keyMovements;     
     function keyMovements(e){   
-      e = e || window.event;
-      function food(){
-        context.fillRect(food_x,food_y,width,height)
-        return
-      }
+        e = e || window.event;
+        console.log('keyyyyyy')
+        console.log(key)
+        console.log('**************') 
+        if (left_move){
+          clearInterval(left_move);
+        } 
+        if(right_move){
+          clearInterval(right_move)
+        }
+        if(down_move){
+          clearInterval(down_move)
+        }
+        if(up_move){
+          clearInterval(up_move)
+        }
+
       if (e.keyCode == '37'){
-        console.log('left arrow key is pressed');
-        leftmove = setInterval(leftMovement,500);
-        flag_leftmovement =1;
-        if (flag_downmovement == 1){
-           clearInterval(downmove);
-           flag_downmovement =0;
-        }
-        if (flag_upmovement == 1){
-           clearInterval(upmove);
-           flag_upmovement = 0;
-        }
-        if (flag_rightmovement == 1){
-          clearInterval(rightmove);
-          flag_rightmovement = 0;
-        }
+          if (key == '39'){
+            clearInterval(left_move)
+            right_move = setInterval(rightMovement,500);
+          }
+          else{
+            key = '37';
+            left_move = setInterval(leftMovement,500);
+          }
       }
+
       else if (e.keyCode == '38'){
-        upmove = setInterval(upMovement,500);
-        flag_upmovement= 1;
-        if (flag_rightmovement ==1){
-          clearInterval(rightmove);
-          flag_rightmovement = 0;
+        if(key == '40'){
+          clearInterval(down_move)
+          down_move = setInterval(downMovement,500);
         }
-        if (flag_leftmovement == 1){
-          clearInterval(leftmove);
-          flag_leftmovement = 0;
-        }
-        if (flag_downmovement == 1){
-           clearInterval(downmove);
-           flag_downmovement = 0;
+        else{
+        key = '38';
+        up_move = setInterval(upMovement,500);
         }
       }
+
       else if(e.keyCode == '39'){
-        console.log('right arrow key is pressed');
-        rightmove = setInterval(rightMovement,500);
-        flag_rightmovement = 1;
-        if (flag_downmovement == 1) {
-           clearInterval(downmove);
-           flag_downmovement = 0;
+        if (key == '37'){
+          clearTimeout(right_move)
+          right_move = setInterval(leftMovement,500);
         }
-        if (flag_upmovement == 1){
-          clearInterval(upmove);
-          flag_upmovement = 0;
+        else{
+        key = '39';
+        right_move = setInterval(rightMovement,500);
         }
-        if (flag_leftmovement == 1){
-          clearInterval(leftmove);
-          flag_leftmovement = 0;
-        }
-        
       }
+
       else if (e.keyCode == '40'){
-        console.log('down arrow key is pressed');
-        downmove = setInterval(downMovement,500);
-        flag_downmovement = 1;
-        if (flag_upmovement == 1){
-          clearInterval(upmove);
+        if (key == '38'){
+           clearInterval(up_move)
+           up_move = setInterval(upMovement,500);
         }
-        if (flag_leftmovement == 1){
-          clearInterval(leftmove);
-          flag_leftmovement = 0;
+        else{
+        key = '40';
+        down_move = setInterval(downMovement,500);
         }
-        if (flag_rightmovement == 1){
-          clearInterval(rightmove);
-          flag_rightmovement = 0;
-        }
-        
-      }     
+      }
       
       function upMovement(){
             context.clearRect(array1[array1.length-1],array2[array2.length-1],20,20)    
@@ -138,7 +131,7 @@ pls show the deatails
             for(var i=0;i<array1.length;i++){
               context.fillRect(array1[i],array2[i],20,20)
             }
-            if (y == -30){
+            if (array2[array2.length-1] == 40){
               window.alert("game ends here")
             }
           return;
@@ -190,7 +183,7 @@ pls show the deatails
            array2[0] = array2[1];
            for(var i= 0; i<array1.length;i++){ 
              context.fillRect(array1[i],array2[i],20,20); 
-          } 
+          }  
         } 
     }
 

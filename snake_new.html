@@ -1,0 +1,181 @@
+<html>
+<head>
+    
+</head>
+<body>
+<canvas id = "mycanvas" width = "500px" height ="500px" style = "border: 1px solid">
+pls show the deatails
+</canvas>
+<script>
+    var ele =  document.getElementById('mycanvas');
+    if (ele && ele.getContext){
+    var context = ele.getContext('2d');
+    var k=0
+    var x = 30;
+    var y = 150;
+    //var y = 200;
+    var width = 60;
+    var height = 20;
+    var food_x =90 ;
+    var food_y =90 ;
+    var cleariny_x = 90;
+    var clearing_y = 90;
+    var clearing_height = 20;
+    var clearing_width = 20;
+    var predefined_height = 60;
+    flag_right = 0;
+    if(context){
+      //context.fillStyle = '#ffffff';
+      //context.fillStroke = '#f00';
+      //context.fillRect(30,150,20,20);
+      context.fillRect(x,y,width,height)
+      // context.fillRect(52,150,20,20);
+      // context.fillRect(74,150,20,20);
+      // context.fillRect(96,150,20,20);
+      // context.fillRect(250,80,20,20);
+      // context.fillRect(0,0,20,20);
+      // context.fillRect(22,0,20,20);
+      // context.fillRect(0,22,20,20);
+      // context.fillRect(0,44,20,20);
+      // context.fillRect (480,480,20,20);
+      // context.fillRect(480,458,20,20);
+      // context.fillRect(458,480,20,20);
+      //context.fillStroke(10,39,49,110);
+      }
+    }
+    var flag_upmovement = 0;
+    var flag_downmovement = 0;
+    var flag_leftmovement = 0;
+    var flag_rightmovement = 0;
+    document.onkeydown = keyMovements;     
+    function keyMovements(e){   
+      e = e || window.event;
+      //timeoutId = setTimeout(food,500)
+      function food(){
+        context.fillRect(food_x,food_y,width,height)
+        return
+      }
+      if (e.keyCode == '37'){
+        console.log('left arrow key is pressed');
+        leftmove = setInterval(leftMovement,500);
+        flag_leftmovement =1;
+        if (flag_downmovement == 1){
+           clearInterval(downmove);
+           flag_downmovement =0;
+        }
+        if (flag_upmovement == 1){
+           clearInterval(upmove);
+           flag_upmovement = 0;
+        }
+        if (flag_rightmovement == 1){
+          clearInterval(rightmove);
+          flag_rightmovement = 0;
+        }
+      }
+      else if (e.keyCode == '38'){
+        upmove = setInterval(upMovement,500);
+        flag_upmovement= 1;
+        if (flag_rightmovement ==1){
+          clearInterval(rightmove);
+          flag_rightmovement = 0;
+        }
+        if (flag_leftmovement == 1){
+          clearInterval(leftmove);
+          flag_leftmovement = 0;
+        }
+        if (flag_downmovement == 1){
+           clearInterval(downmove);
+           flag_downmovement = 0;
+        }
+      }
+      else if(e.keyCode == '39'){
+        console.log('right arrow key is pressed');
+        rightmove = setInterval(rightMovement,500);
+        flag_rightmovement = 1;
+        if (flag_downmovement == 1) {
+           clearInterval(downmove);
+           flag_downmovement = 0;
+        }
+        if (flag_upmovement == 1){
+          clearInterval(upmove);
+          flag_upmovement = 0;
+        }
+        if (flag_leftmovement == 1){
+          clearInterval(leftmove);
+          flag_leftmovement = 0;
+        }
+        
+      }
+      else if (e.keyCode == '40'){
+        console.log('down arrow key is pressed');
+        downmove = setInterval(downMovement,500);
+        flag_downmovement = 1;
+        if (flag_upmovement == 1){
+          clearInterval(upmove);
+        }
+        if (flag_leftmovement == 1){
+          clearInterval(leftmove);
+          flag_leftmovement = 0;
+        }
+        if (flag_rightmovement == 1){
+          clearInterval(rightmove);
+          flag_rightmovement = 0;
+        }
+        
+      }     
+
+      var food=-20;
+      var g = 40;
+      var k=-40;
+      var r = 0;
+      flag_check = 0;
+      
+      function upMovement(){
+            context.clearRect(x,y,width,height)
+            context.fillRect(x,y-20,width,height);
+            y=y-20;        
+            if (y == -30){
+              window.alert("game ends here")
+            }
+          return;
+      }
+
+     function downMovement(){
+       context.fillRect(x,y+20,width,height)
+       context.clearRect(x,y,width,height)
+       y=y+20;
+       if (y==510){
+         window.alert('the game ends here')
+       }
+       return;
+     }
+     function leftMovement(){
+       context.fillRect(x-20,y,width,height)
+       context.clearRect(x,y,width,height)
+       x=x-20;
+       if(x==-30){
+         window.alert('game ends here');
+       }
+       return;
+     }  
+     var length = 40;
+     var decrementar = 40;
+     var width_finder = 0;
+     var limit = 0;
+     var index = 20;
+     var flag_check = 0;
+     function rightMovement(){
+          context.clearRect(x,y,clearing_width,clearing_height)
+          context.fillRect(x+20,y,width,height)
+          console.log('hai')
+          x=x+20;
+       if(x == 510){
+         window.alert('game ends')
+       }
+       return;
+     }     
+    }
+
+</script>
+</body>
+</html>

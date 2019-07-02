@@ -76,9 +76,25 @@ pls show the deatails
           var y = Math.floor(Math.random()*(20-1+1))+1;
            random_x = 22*x+8;
            random_y = 22*y+-4;
-           context.fillStyle = 'blue'
+           food_check();
+           context.fillStyle = 'green'
            context.fillRect(random_x,random_y,20,20);
         }   
+        function food_check(){
+          for(i=0;i<=array1.length;i++){
+           console.log(array1[i])
+           if (random_x == array1[i]){
+             if (random_y == array2[i]){
+               food_eating();
+               console.log('already existing')
+             }
+           }
+           else{
+             console.log('not existing existing')
+           }
+         }
+
+        }
 
       if (e.keyCode == '37'){
           if (key == '39'){
@@ -156,7 +172,7 @@ pls show the deatails
              context.fillStyle = 'red'
              context.fillRect(array1[i],array2[i],20,20)
           }           
-            if (array2[0] == -26){
+            if (array2[0] == -4){
               window.alert("game ends here")
               location.reload();
             }
@@ -271,7 +287,7 @@ pls show the deatails
             context.fillStyle = 'red'
              context.fillRect(array1[i],array2[i],20,20); 
           } 
-          if (array1[0] == 712){
+          if (array1[0] == 690){
              window.alert('the game ends here')
              location.reload();
           }

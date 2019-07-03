@@ -1,0 +1,276 @@
+<html>
+<head>
+
+  
+    
+</head>
+<body style="background-color:blue">
+    <h1 style = 'margin-left: 43%;color: initial;'>snake game</h1>
+<div styel = 'margin-left: 70%;'>
+  <label style = 'margin-left: 85%;font-size: 20;color: white'>score</label>  
+  <label id = 'score' style = 'font-size: 25;padding: 15;'>0</label>
+</div>    
+ 
+<p style='margin-left: 22%;margin-top: 3%;'>  
+<canvas id = "mycanvas" width = "700px" height ="500px" style = "border: 1px solid;color: blue;background-color: turquoise">
+
+pls show the deatails
+</canvas>
+</p>
+<script>
+     
+    var ele =  document.getElementById('mycanvas');
+    if (ele && ele.getContext){
+    var context = ele.getContext('2d');
+    var k=0
+    var x = 30;
+    var y = 150;
+    var width = 20;
+    var height = 20;
+    var array1 = [];
+    var array2 = [];
+    array1 [0] = 96;
+    array2 [0] = 150;
+    array1 [1] = 74;
+    array2 [1] = 150;
+    array1 [2] = 52;
+    array2 [2] = 150;
+    array1 [3] = 30;
+    array2 [3] = 150;
+    var score = 0;
+    var j =0;
+    if(context){
+      context.fillStyle = 'black'
+      context.fillRect(array1[0],array2[0],20,20);
+      context.fillStyle = 'red'
+      context.fillRect(array1[1],array2[1],20,20);
+      context.fillRect(array1[2],array2[2],20,20);
+      context.fillRect(array1[3],array2[3],20,20);
+      }
+    }
+    var left_move;
+    var right_move;
+    var up_move;
+    var down_move;
+    var key;
+    var food ;
+    var random_x;
+    var random_y;
+    var i = 0; 
+    var time;
+    document.onkeydown = keyMovements;
+    function keyMovements(e){   
+        e = e || window.event;                
+        console.log(random_x)
+        console.log(random_y)
+        if (left_move){
+          clearInterval(left_move);
+        } 
+        if(right_move){
+          clearInterval(right_move)
+        }
+        if(down_move){
+          clearInterval(down_move)
+        }
+        if(up_move){
+          clearInterval(up_move)
+        }
+        if (i==0){
+          food_eating();
+          key = e.keyCode;
+          i = 1;
+        }
+        function food_eating(){
+          var x = Math.floor(Math.random()*(30-1+1))+1;
+          var y = Math.floor(Math.random()*(20-1+1))+1;
+           random_x = 22*x+8;
+           random_y = 22*y+-4;
+           food_check();
+           context.fillStyle = 'green'
+           context.fillRect(random_x,random_y,20,20);
+        }   
+        function food_check(){
+          for(i=0;i<=array1.length;i++){
+           console.log(array1[i])
+           if (random_x == array1[i]){
+             if (random_y == array2[i]){
+               food_eating();
+             }
+           }
+           else{
+             console.log('not existing ')
+           }
+         }
+
+        }
+      
+      if (e.keyCode == '37'){
+          if (key == 'right'){
+            right_move = setInterval(rightMovement,100);
+          }
+          else{          
+            left_move = setInterval(leftMovement,100);
+          }
+      }
+
+      else if (e.keyCode == '38'){
+          if(key == 'down'){
+            down_move = setInterval(downMovement,100);
+          }
+          else{        
+          up_move = setInterval(upMovement,100);
+          }
+      }
+
+      else if(e.keyCode == '39'){      
+          if (key == 'left'){
+          left_move = setInterval(leftMovement,100);
+          }
+          else{        
+          right_move = setInterval(rightMovement,100);        
+          }
+      }
+
+      else if (e.keyCode == '40'){
+          if (key == 'up'){
+            up_move = setInterval(upMovement,100);
+          }
+          else{
+          down_move = setInterval(downMovement,100);
+          }
+      }
+
+      function array_swapping(j){
+              for(var i=array2.length-j;i>=0;i--){
+                array2[i] = array2[i-1]
+                array1[i] = array1[i-1]
+              }
+      }
+
+      function snake_collision(){
+        for(i=1;i<=array2.length;i++){
+           if (array2[0] == array2[i]){
+             if (array1[0] == array1[i]){
+               window.alert('your score is '+score)
+               window.alert('collision detected')
+               location.reload();
+             }
+           }
+         }     
+      }
+
+      function snake_body_filling(){
+        context.fillStyle = 'black'
+        context.fillRect(array1[0],array2[0],20,20)
+        for(var i=1;i<array1.length;i++){
+             context.fillStyle = 'red'
+             context.fillRect(array1[i],array2[i],20,20)
+          }
+      }
+  
+      function upMovement(){ 
+          key = 'up'
+          context.clearRect(array1[array1.length-1],array2[array2.length-1],20,20)        
+          if(array1[0]==random_x && array2[0]==random_y){
+              array_swapping(0);
+              array1[0]= random_x;
+              array2[0]= random_y-22;
+              food_eating();
+              score = score + 5;
+              document.getElementById('score').textContent = score ;
+          }         
+          else{
+              array_swapping(1);
+              array1[0] = array1[1]
+              array2[0] = array2[1]-22;
+         }
+        snake_collision();
+        snake_body_filling();           
+            if (array2[0] == -4){
+              window.alert("game ends here")
+              location.reload();
+            }
+          return;
+      }
+
+     function downMovement(){
+       key = 'down'
+       context.clearRect(array1[array1.length-1],array2[array2.length-1],20,20)
+       if(array1[0]==random_x && array2[0]==random_y){
+              array_swapping(0);
+              array1[0]= random_x;
+              array2[0]= random_y+22;
+              food_eating();
+              score = score + 5;
+              document.getElementById('score').textContent = score ;
+      }
+      else{
+          array_swapping(1);
+          array2[0] = array2[1]+22;
+          array1[0] = array1[1];
+      }
+      snake_collision(); 
+      snake_body_filling(); 
+       if (array2[0] == 502){
+         window.alert('the game ends here')
+         location.reload();
+       }
+       return;
+     }
+
+     function leftMovement(){
+       key = 'left'
+       context.clearRect(array1[array1.length-1],array2[array2.length-1],20,20)
+      if(array1[0]==random_x && array2[0]==random_y){
+              array_swapping(0);
+              array1[0]= random_x-22;
+              array2[0]= random_y;
+              food_eating();
+              score = score + 5;
+              document.getElementById('score').textContent = score ;
+          }
+      else{
+              array_swapping(1);
+              array1[0]=array1[1]-22;
+              array2[0] = array2[1];
+      }
+        snake_collision(); 
+        snake_body_filling(); 
+       if(array1[0] == -14){
+         window.alert('game ends here');
+         location.reload();
+       }
+       return;
+     }
+
+     function rightMovement(){
+           key = 'right'
+           if(array1[0] == 510){
+           window.alert('game ends')
+           }
+           context.clearRect(array1[array1.length-1],array2[array2.length-1],20,20)
+           if(array1[0]==random_x && array2[0]==random_y){
+              array_swapping(0);
+              array1[0]= random_x+22;
+              array2[0]= random_y;
+              food_eating();
+              score = score + 5;
+              document.getElementById('score').textContent = score ;
+          }
+          else{
+                array_swapping(1);
+                array1[0]=array1[1]+22;
+                array2[0] = array2[1];
+          }
+          snake_collision();
+          snake_body_filling();  
+          if (array1[0] == 690){
+             window.alert('the game ends here')
+             location.reload();
+          } 
+          //document.getElementById('score').textContent = 'vishnu'  ;         
+        } 
+    }
+</script>
+</body>
+</html>

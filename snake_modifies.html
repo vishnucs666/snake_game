@@ -1,17 +1,16 @@
 <html>
-<head>
-
-  
-    
+<head>  
 </head>
 <body style="background-color:blue">
-    <h1 style = 'margin-left: 43%;color: initial;'>snake game</h1>
+    <h1 style = 'margin-left: 43%;color: antiquewhite; font-size: 40;'>snake game</h1>
 <div styel = 'margin-left: 70%;'>
-  <label style = 'margin-left: 85%;font-size: 20;color: white'>score</label>  
-  <label id = 'score' style = 'font-size: 25;padding: 15;'>0</label>
+  <h7 style = 'margin-left: 85%;font-size: 20;color: antiquewhite;'>score</h7>  
+  <label id = 'score' style = 'font-size: 25;padding: 15;color: black;'>0</label>
 </div>    
+<canvas id = "my" width = "700px" height ="20px" style = "margin-left: 22%;  border: 1px solid;color: blue;background-color: blue;"></canvas>
  
-<p style='margin-left: 22%;margin-top: 3%;'>  
+<p style='margin-left: 22%;margin-top: 1%;'>  
+  
 <canvas id = "mycanvas" width = "700px" height ="500px" style = "border: 1px solid;color: blue;background-color: turquoise">
 
 pls show the deatails
@@ -37,8 +36,13 @@ pls show the deatails
     array2 [2] = 150;
     array1 [3] = 30;
     array2 [3] = 150;
+    var limit1;
     var score = 0;
+    var limit = 1;
+    var flag =0; 
     var j =0;
+    var new_flag =0;
+    random_check = 0;
     if(context){
       context.fillStyle = 'black'
       context.fillRect(array1[0],array2[0],20,20);
@@ -48,6 +52,25 @@ pls show the deatails
       context.fillRect(array1[3],array2[3],20,20);
       }
     }
+    var x= 0;
+    var score_bonus;
+    var element = document.getElementById('my')
+    if(element && element.getContext){
+      var ctx = element.getContext('2d');
+      if (ctx){
+        // ctx.fillStyle = 'red';
+        // for (var i= 0; i<35;i++){
+        // ctx.fillRect(x,0,20,20);
+        // x= x+20;
+        // }
+        // x = 0;
+        // score_bonus = setInterval(bonus,100);
+      } 
+    }
+    // function bonus(){
+    //   ctx.clearRect(x,0,20,20);
+    //   x = x+20;
+    // }
     var left_move;
     var right_move;
     var up_move;
@@ -58,6 +81,7 @@ pls show the deatails
     var random_y;
     var i = 0; 
     var time;
+    var score_bonus;
     document.onkeydown = keyMovements;
     function keyMovements(e){   
         e = e || window.event;                
@@ -77,7 +101,7 @@ pls show the deatails
         }
         if (i==0){
           food_eating();
-          key = e.keyCode;
+          //key = e.keyCode;
           i = 1;
         }
         function food_eating(){
@@ -85,8 +109,14 @@ pls show the deatails
           var y = Math.floor(Math.random()*(20-1+1))+1;
            random_x = 22*x+8;
            random_y = 22*y+-4;
-           food_check();
+           food_check()
+           limit1 = limit+1;
+           if (limit1%5 != 0){
            context.fillStyle = 'green'
+           }
+           else{ 
+           context.fillStyle = 'blue'
+           }
            context.fillRect(random_x,random_y,20,20);
         }   
         function food_check(){
@@ -98,45 +128,75 @@ pls show the deatails
              }
            }
            else{
-             console.log('not existing ')
+             console.log('not existing')
            }
          }
+        }
 
+      function bonus_point(){
+            score_bonus = setInterval(bonus,105);
+        }
+        function bonus(){   
+           random_check = 1;
+           if(array1[0]==random_x && array2[0]==random_y){
+              console.log('food enterd and eated in the bonus part')
+              for(var h = x;h<=700;h= h+20){
+                ctx.clearRect(h,0,20,20);
+              }
+              x = 700;
+              array1.length = array1.length+1;
+              array2.length = array2.length+1;
+              score = score + 50;
+              limit = limit + 1;
+              food_eating();
+              document.getElementById('score').textContent = score ;
+           }
+           else{
+            ctx.clearRect(x,0,20,20);
+            x = x+20;
+           }
+            if (x == 700){
+              clearInterval(score_bonus)
+              console.log('flag is emitted')
+              flag = 0;
+              new_flag =1;
+              random_check = 0;
+           }
         }
       
       if (e.keyCode == '37'){
           if (key == 'right'){
-            right_move = setInterval(rightMovement,100);
+            right_move = setInterval(rightMovement,80);
           }
           else{          
-            left_move = setInterval(leftMovement,100);
+            left_move = setInterval(leftMovement,80);
           }
       }
 
       else if (e.keyCode == '38'){
           if(key == 'down'){
-            down_move = setInterval(downMovement,100);
+            down_move = setInterval(downMovement,80);
           }
           else{        
-          up_move = setInterval(upMovement,100);
+          up_move = setInterval(upMovement,80);
           }
       }
 
       else if(e.keyCode == '39'){      
           if (key == 'left'){
-          left_move = setInterval(leftMovement,100);
+          left_move = setInterval(leftMovement,80);
           }
           else{        
-          right_move = setInterval(rightMovement,100);        
+          right_move = setInterval(rightMovement,80);        
           }
       }
 
       else if (e.keyCode == '40'){
           if (key == 'up'){
-            up_move = setInterval(upMovement,100);
+            up_move = setInterval(upMovement,80);
           }
           else{
-          down_move = setInterval(downMovement,100);
+          down_move = setInterval(downMovement,80);
           }
       }
 
@@ -167,26 +227,42 @@ pls show the deatails
              context.fillRect(array1[i],array2[i],20,20)
           }
       }
-  
       function upMovement(){ 
           key = 'up'
-          context.clearRect(array1[array1.length-1],array2[array2.length-1],20,20)        
-          if(array1[0]==random_x && array2[0]==random_y){
-              array_swapping(0);
-              array1[0]= random_x;
-              array2[0]= random_y-22;
+          if (limit % 5 == 0 && flag == 0 && new_flag ==0){
+            console.log('food grow started')
+            x =0;
+            for (var i= 0; i<35;i++){
+            ctx.fillStyle = 'red'
+            ctx.fillRect(x,0,20,20);
+            x= x+20;
+            }
+            x= 0;
+            flag =1;
+            bonus_point();
+          }        
+          else if(array1[0]==random_x && array2[0]==random_y && random_check == 0){
+              console.log('thanks')
+              array1.length = array1.length+1;
+              array2.length = array2.length+1;
               food_eating();
               score = score + 5;
+              limit = limit + 1;
               document.getElementById('score').textContent = score ;
           }         
           else{
+              context.clearRect(array1[array1.length-1],array2[array2.length-1],20,20)
               array_swapping(1);
               array1[0] = array1[1]
               array2[0] = array2[1]-22;
          }
+         if(limit % 5 != 0){
+            new_flag =0;
+          }
         snake_collision();
         snake_body_filling();           
             if (array2[0] == -4){
+              window.alert('your score is '+score)
               window.alert("game ends here")
               location.reload();
             }
@@ -195,23 +271,40 @@ pls show the deatails
 
      function downMovement(){
        key = 'down'
-       context.clearRect(array1[array1.length-1],array2[array2.length-1],20,20)
-       if(array1[0]==random_x && array2[0]==random_y){
-              array_swapping(0);
-              array1[0]= random_x;
-              array2[0]= random_y+22;
+       if (limit % 5 == 0 && flag == 0 && new_flag ==0){
+        console.log('food grow started')
+            x =0;
+            for (var i= 0; i<35;i++){
+            ctx.fillStyle = 'red'
+            ctx.fillRect(x,0,20,20);
+            x= x+20;
+            }
+            x= 0;
+            flag =1;
+            bonus_point();
+          }
+        else if(array1[0]==random_x && array2[0]==random_y && random_check == 0){
+          console.log('thanks')
+              array1.length = array1.length+1;
+              array2.length = array2.length+1;
               food_eating();
               score = score + 5;
+              limit = limit +1;
               document.getElementById('score').textContent = score ;
       }
       else{
+          context.clearRect(array1[array1.length-1],array2[array2.length-1],20,20)
           array_swapping(1);
           array2[0] = array2[1]+22;
           array1[0] = array1[1];
       }
+      if(limit % 5 != 0){
+            new_flag =0;
+          }
       snake_collision(); 
       snake_body_filling(); 
        if (array2[0] == 502){
+         window.alert('your score is '+score)
          window.alert('the game ends here')
          location.reload();
        }
@@ -220,23 +313,40 @@ pls show the deatails
 
      function leftMovement(){
        key = 'left'
-       context.clearRect(array1[array1.length-1],array2[array2.length-1],20,20)
-      if(array1[0]==random_x && array2[0]==random_y){
-              array_swapping(0);
-              array1[0]= random_x-22;
-              array2[0]= random_y;
+       if (limit % 5 == 0 && flag == 0 && new_flag ==0){
+        console.log('food grow started')
+            x =0;
+            for (var i= 0; i<35;i++){
+            ctx.fillStyle = 'red'
+            ctx.fillRect(x,0,20,20);
+            x= x+20;
+            }
+            x = 0;
+            flag =1;
+            bonus_point();
+          }
+      else if(array1[0]==random_x && array2[0]==random_y && random_check == 0){
+        console.log('thanks')
+              array1.length = array1.length+1;
+              array2.length = array2.length+1;
               food_eating();
               score = score + 5;
+              limit = limit +1;
               document.getElementById('score').textContent = score ;
           }
       else{
+              context.clearRect(array1[array1.length-1],array2[array2.length-1],20,20)
               array_swapping(1);
               array1[0]=array1[1]-22;
               array2[0] = array2[1];
       }
+      if(limit % 5 != 0){
+            new_flag =0;
+          }
         snake_collision(); 
         snake_body_filling(); 
        if(array1[0] == -14){
+         window.alert('your score is '+score)
          window.alert('game ends here');
          location.reload();
        }
@@ -248,27 +358,44 @@ pls show the deatails
            if(array1[0] == 510){
            window.alert('game ends')
            }
-           context.clearRect(array1[array1.length-1],array2[array2.length-1],20,20)
-           if(array1[0]==random_x && array2[0]==random_y){
-              array_swapping(0);
-              array1[0]= random_x+22;
-              array2[0]= random_y;
+           if (limit % 5 == 0 && flag == 0 && new_flag ==0){
+            console.log('food grow started')
+            x =0;
+            for (var i= 0; i<35;i++){
+            ctx.fillStyle = 'red'
+            ctx.fillRect(x,0,20,20);
+            x= x+20;
+            }
+             x =0;
+             flag =1;
+            bonus_point();
+          }
+
+          else if(array1[0]==random_x && array2[0]==random_y && random_check == 0){
+            console.log('thanks')
+              array1.length = array1.length+1;
+              array2.length = array2.length+1;
               food_eating();
               score = score + 5;
+              limit = limit +1;
               document.getElementById('score').textContent = score ;
           }
           else{
+                context.clearRect(array1[array1.length-1],array2[array2.length-1],20,20)
                 array_swapping(1);
                 array1[0]=array1[1]+22;
                 array2[0] = array2[1];
           }
+          if(limit % 5 != 0){
+            new_flag =0;
+          }
           snake_collision();
           snake_body_filling();  
           if (array1[0] == 690){
+             window.alert('your score is '+score)
              window.alert('the game ends here')
              location.reload();
           } 
-          //document.getElementById('score').textContent = 'vishnu'  ;         
         } 
     }
 </script>

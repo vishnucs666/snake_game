@@ -2,14 +2,19 @@
 <head>  
 </head>
 <body style="background-color:blue">
-    <h1 style = 'margin-left: 43%;color: antiquewhite; font-size: 40;'>snake game</h1>
+    <h1 style = 'margin-left: 42%;color: antiquewhite; font-size: 30;'>SNAKE GAME</h1>
 <div styel = 'margin-left: 70%;'>
-  <h7 style = 'margin-left: 85%;font-size: 20;color: antiquewhite;'>score</h7>  
-  <label id = 'score' style = 'font-size: 25;padding: 15;color: black;'>0</label>
+  <h7 style = 'margin-left: 85%;font-size: 20;color: antiquewhite;'>High Score</h7>  
+  <label id = 'high_score' style = 'font-size: 27;padding: 15;color: black;'>0</label>
+</div>
+<div styel = 'margin-left: 70%;'>
+  <h7 style = 'margin-left: 85%;font-size: 20;color: antiquewhite;'>Score</h7>  
+  <label id = 'score' style = 'font-size: 27;padding: 15;color: black;'>0</label>
 </div>    
+
 <canvas id = "my" width = "700px" height ="20px" style = "margin-left: 22%;  border: 1px solid;color: blue;background-color: blue;"></canvas>
  
-<p style='margin-left: 22%;margin-top: 1%;'>  
+<p style='margin-left: 22%;margin-top: 0%;'>  
   
 <canvas id = "mycanvas" width = "700px" height ="500px" style = "border: 1px solid;color: blue;background-color: turquoise">
 
@@ -17,15 +22,16 @@ pls show the deatails
 </canvas>
 </p>
 <script>
-     
+    
+    document.getElementById('high_score').textContent = localStorage.getItem("high_score");
     var ele =  document.getElementById('mycanvas');
     if (ele && ele.getContext){
     var context = ele.getContext('2d');
-    var k=0
-    var x = 30;
-    var y = 150;
-    var width = 20;
-    var height = 20;
+    // var k=0
+    // var x = 30;
+    // var y = 150;
+    // var width = 20;
+    // var height = 20;
     var array1 = [];
     var array2 = [];
     array1 [0] = 96;
@@ -58,19 +64,8 @@ pls show the deatails
     if(element && element.getContext){
       var ctx = element.getContext('2d');
       if (ctx){
-        // ctx.fillStyle = 'red';
-        // for (var i= 0; i<35;i++){
-        // ctx.fillRect(x,0,20,20);
-        // x= x+20;
-        // }
-        // x = 0;
-        // score_bonus = setInterval(bonus,100);
       } 
     }
-    // function bonus(){
-    //   ctx.clearRect(x,0,20,20);
-    //   x = x+20;
-    // }
     var left_move;
     var right_move;
     var up_move;
@@ -101,8 +96,11 @@ pls show the deatails
         }
         if (i==0){
           food_eating();
-          //key = e.keyCode;
           i = 1;
+          if (e.keyCode == '37'){
+            window.alert('pls press right or up or down key to begin the game')
+            location.reload();
+          }
         }
         function food_eating(){
           var x = Math.floor(Math.random()*(30-1+1))+1;
@@ -134,11 +132,15 @@ pls show the deatails
         }
 
       function bonus_point(){
-            score_bonus = setInterval(bonus,105);
+            score_bonus = setInterval(bonus,80);
         }
         function bonus(){   
            random_check = 1;
-           if(array1[0]==random_x && array2[0]==random_y){
+           if(x<300){
+
+           }
+           if(array1[0]==random_x && array2[0]==random_y && random_check ==1){
+              food_eating();
               console.log('food enterd and eated in the bonus part')
               for(var h = x;h<=700;h= h+20){
                 ctx.clearRect(h,0,20,20);
@@ -148,7 +150,6 @@ pls show the deatails
               array2.length = array2.length+1;
               score = score + 50;
               limit = limit + 1;
-              food_eating();
               document.getElementById('score').textContent = score ;
            }
            else{
@@ -161,6 +162,8 @@ pls show the deatails
               flag = 0;
               new_flag =1;
               random_check = 0;
+              context.fillStyle = 'green'
+              context.fillRect(random_x,random_y,20,20);
            }
         }
       
@@ -212,11 +215,29 @@ pls show the deatails
            if (array2[0] == array2[i]){
              if (array1[0] == array1[i]){
                window.alert('your score is '+score)
+               high_scores();
                window.alert('collision detected')
                location.reload();
+
              }
            }
          }     
+      }
+
+      function high_scores(){
+        var high_score = localStorage.getItem("high_score");
+        if(high_score != null){
+          if(score>high_score){
+            localStorage.setItem('high_score',score);
+            high_score = score;
+          }
+        }
+        else{
+           localStorage.setItem('high_score',score);
+           high_score = score; 
+          }
+          document.getElementById('high_score').textContent = high_score ;
+        
       }
 
       function snake_body_filling(){
@@ -227,10 +248,17 @@ pls show the deatails
              context.fillRect(array1[i],array2[i],20,20)
           }
       }
-      function upMovement(){ 
-          key = 'up'
-          if (limit % 5 == 0 && flag == 0 && new_flag ==0){
-            console.log('food grow started')
+
+      function food_process(){
+              array1.length = array1.length+1;
+              array2.length = array2.length+1;
+              food_eating();
+              score = score + 5;
+              limit = limit + 1;
+              document.getElementById('score').textContent = score ;
+      }
+
+    function bonus_process(){
             x =0;
             for (var i= 0; i<35;i++){
             ctx.fillStyle = 'red'
@@ -240,15 +268,16 @@ pls show the deatails
             x= 0;
             flag =1;
             bonus_point();
+
+    }
+  
+      function upMovement(){ 
+          key = 'up'
+          if (limit % 5 == 0 && flag == 0 && new_flag ==0){
+            bonus_process();
           }        
-          else if(array1[0]==random_x && array2[0]==random_y && random_check == 0){
-              console.log('thanks')
-              array1.length = array1.length+1;
-              array2.length = array2.length+1;
-              food_eating();
-              score = score + 5;
-              limit = limit + 1;
-              document.getElementById('score').textContent = score ;
+          if(array1[0]==random_x && array2[0]==random_y && random_check == 0){
+            food_process();
           }         
           else{
               context.clearRect(array1[array1.length-1],array2[array2.length-1],20,20)
@@ -261,9 +290,9 @@ pls show the deatails
           }
         snake_collision();
         snake_body_filling();           
-            if (array2[0] == -4){
+            if (array2[0] == -26){
               window.alert('your score is '+score)
-              window.alert("game ends here")
+              high_scores();
               location.reload();
             }
           return;
@@ -272,40 +301,25 @@ pls show the deatails
      function downMovement(){
        key = 'down'
        if (limit % 5 == 0 && flag == 0 && new_flag ==0){
-        console.log('food grow started')
-            x =0;
-            for (var i= 0; i<35;i++){
-            ctx.fillStyle = 'red'
-            ctx.fillRect(x,0,20,20);
-            x= x+20;
-            }
-            x= 0;
-            flag =1;
-            bonus_point();
+            bonus_process();
           }
-        else if(array1[0]==random_x && array2[0]==random_y && random_check == 0){
-          console.log('thanks')
-              array1.length = array1.length+1;
-              array2.length = array2.length+1;
-              food_eating();
-              score = score + 5;
-              limit = limit +1;
-              document.getElementById('score').textContent = score ;
-      }
-      else{
-          context.clearRect(array1[array1.length-1],array2[array2.length-1],20,20)
-          array_swapping(1);
-          array2[0] = array2[1]+22;
-          array1[0] = array1[1];
-      }
-      if(limit % 5 != 0){
-            new_flag =0;
+          if(array1[0]==random_x && array2[0]==random_y && random_check == 0){
+            food_process();
+          }
+          else{
+            context.clearRect(array1[array1.length-1],array2[array2.length-1],20,20)
+            array_swapping(1);
+            array2[0] = array2[1]+22;
+            array1[0] = array1[1];
+          }
+         if(limit % 5 != 0){
+             new_flag =0;
           }
       snake_collision(); 
       snake_body_filling(); 
        if (array2[0] == 502){
          window.alert('your score is '+score)
-         window.alert('the game ends here')
+         high_scores();
          location.reload();
        }
        return;
@@ -314,25 +328,10 @@ pls show the deatails
      function leftMovement(){
        key = 'left'
        if (limit % 5 == 0 && flag == 0 && new_flag ==0){
-        console.log('food grow started')
-            x =0;
-            for (var i= 0; i<35;i++){
-            ctx.fillStyle = 'red'
-            ctx.fillRect(x,0,20,20);
-            x= x+20;
-            }
-            x = 0;
-            flag =1;
-            bonus_point();
+            bonus_process();
           }
-      else if(array1[0]==random_x && array2[0]==random_y && random_check == 0){
-        console.log('thanks')
-              array1.length = array1.length+1;
-              array2.length = array2.length+1;
-              food_eating();
-              score = score + 5;
-              limit = limit +1;
-              document.getElementById('score').textContent = score ;
+      if(array1[0]==random_x && array2[0]==random_y && random_check == 0){
+            food_process();
           }
       else{
               context.clearRect(array1[array1.length-1],array2[array2.length-1],20,20)
@@ -347,7 +346,7 @@ pls show the deatails
         snake_body_filling(); 
        if(array1[0] == -14){
          window.alert('your score is '+score)
-         window.alert('game ends here');
+         high_scores();
          location.reload();
        }
        return;
@@ -355,30 +354,11 @@ pls show the deatails
 
      function rightMovement(){
            key = 'right'
-           if(array1[0] == 510){
-           window.alert('game ends')
-           }
            if (limit % 5 == 0 && flag == 0 && new_flag ==0){
-            console.log('food grow started')
-            x =0;
-            for (var i= 0; i<35;i++){
-            ctx.fillStyle = 'red'
-            ctx.fillRect(x,0,20,20);
-            x= x+20;
-            }
-             x =0;
-             flag =1;
-            bonus_point();
+            bonus_process();
           }
-
-          else if(array1[0]==random_x && array2[0]==random_y && random_check == 0){
-            console.log('thanks')
-              array1.length = array1.length+1;
-              array2.length = array2.length+1;
-              food_eating();
-              score = score + 5;
-              limit = limit +1;
-              document.getElementById('score').textContent = score ;
+          if(array1[0]==random_x && array2[0]==random_y && random_check == 0){
+            food_process();
           }
           else{
                 context.clearRect(array1[array1.length-1],array2[array2.length-1],20,20)
@@ -393,7 +373,7 @@ pls show the deatails
           snake_body_filling();  
           if (array1[0] == 690){
              window.alert('your score is '+score)
-             window.alert('the game ends here')
+             high_scores();
              location.reload();
           } 
         } 

@@ -1,0 +1,36 @@
+<html>
+
+<head>
+    <h1 style = 'margin-left: 40%;color: antiquewhite; font-size: 30;color: red'>SNAKE GAME</h1>
+</head>
+
+<body style='background-color: maroon'>
+<div style= 'margin-top: 10%;margin-left: 20%;font-size: 180%;color: black'>
+<a href= './snake_modifies.html'>New Game</a>
+</div>
+<p  onclick="show_instructions()" style= 'margin-left: 20%;font-size: 180%;' >Instructions
+</p>
+<div id = 'instructions' style = 'margin-left: 20%;font-size:120%;color: white;margin-top: 0%;'>
+    <br>* To start the game press right,up or down key 
+    <br>* When the snake eats food the length of the snake increases by one and gets a score of 5 
+    <br>* When the snake eats 4 foods consecutively the bonus starts , if the snake eats the bonus food within the predefined time the player will get 50 bonus points 
+    <br>* When the snake touches its body or the boundary of the left,right,up or down region the snake dies
+</div>
+
+<script>
+var ids = document.getElementById('instructions');
+ids.style.display = 'none' ;
+function show_instructions(){
+ var ids = document.getElementById('instructions');
+  if(ids.style.display == 'none'){
+    ids.style.display = 'block';
+  }
+  else{
+    ids.style.display = 'none';
+  }
+}
+</script>
+
+</body>
+
+</html>

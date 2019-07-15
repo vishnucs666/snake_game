@@ -1,0 +1,79 @@
+<html>
+
+<head>
+    <h1 style = 'margin-left: 42%;color: antiquewhite; font-size: 30;color: red'>SNAKE GAME</h1>
+</head>
+
+<body style='background-color: blue'>
+
+<p onclick="show_instructions()" style= 'margin-top: 10%;margin-left: 20%;font-size: 180%;color: black'>New game with boundary</p>
+
+<p onclick="show_instructions1()" style= 'margin-left: 20%;font-size: 180%;color: black'>New game with no boundary</p>
+
+<div id = 'instructions' style = 'margin-left: 20%;font-size:120%;color: white;margin-top: 0%;'>
+    <br><u style = 'font-size: 150%; color:black;'>Instructions</u>
+    <br>
+    <br>* Click the new game to start the game. The game will auto start with out any keypress
+    <br> 
+    <br>* Use up,right,left and down button to move the snake to a specified postion.
+    <br>
+    <br>* When the snake eats food the length of the snake increases by one and gets a score of 5. 
+    <br>
+    <br>* When the snake eats 4 foods consecutively the bonus starts , if the snake eats the bonus food within the predefined time <br>&nbsp;&nbsp;&nbsp;&nbsp;the player will get 50 bonus points. 
+    <br>
+    <br>* When the snake touches its body or the boundary of the left,right,up or down region the snake dies.
+    <br>
+    <br>
+    <a href= './boundary.html' style= "color: turquoise;font-size: 130%;">New Game with boundary</a>
+</div>
+
+<div id = 'instructions1' style = 'margin-left: 20%;font-size:120%;color: white;margin-top: 0%;'>
+  <br><u style = 'font-size: 150%;color: black;'>Instructions</u>
+  <br>
+  <br>* Click the new game to start the game. The game will auto start with out any keypress
+  <br> 
+  <br>* Use up,right,left and down button to move the snake to a specified postion.
+  <br>
+  <br>* When the snake eats food the length of the snake increases by one and gets a score of 5. 
+  <br>
+  <br>* When the snake eats 4 foods consecutively the bonus starts , if the snake eats the bonus food within the predefined time <br>&nbsp;&nbsp;&nbsp;&nbsp;the player will get 50 bonus points. 
+  <br>
+  <br>* When the snake touches its body the snake dies.
+  <br>
+  <br>
+  <a href= './test.html' style= "color: turquoise;font-size: 130%;">New Game With no boundary</a>
+</div>
+
+<script>
+var ids1 = document.getElementById('instructions');
+ids1.style.display = 'none' ;
+function show_instructions(){
+  ids2.style.display = 'none';
+ var ids1 = document.getElementById('instructions');
+  if(ids1.style.display == 'none'){
+    ids1.style.display = 'block';
+  }
+  else{
+    ids1.style.display = 'none';
+  }
+}
+
+var ids2 = document.getElementById('instructions1');
+ids2.style.display = 'none';
+function show_instructions1(){
+ids1.style.display = 'none' ;
+ var ids2 = document.getElementById('instructions1');
+  if(ids2.style.display == 'none'){
+    ids2.style.display = 'block';
+  }
+  else{
+    ids2.style.display = 'none';
+  }
+}
+
+
+</script>
+
+</body>
+
+</html>

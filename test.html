@@ -1,0 +1,457 @@
+<html>
+<head>  
+</head>
+<body style="background-color:blue" onload="set()">
+   <b> <h1 style = 'margin-left: 42%;color:#000000; font-size: 27;'><b>SNAKE XENZIA</b></h1></b>
+<div styel = 'margin-left: 70%;'>
+  <h7 style = 'margin-left: 85%;font-size: 20;color: antiquewhite;'>High Score :</h7>  
+  <b><label id = 'high_score' style = 'font-size: 27;padding: 15;color: #000000'><b>0</b></label></b>
+</div>
+<div styel = 'margin-left: 70%;'>
+  <h7 style = 'margin-left: 85%;font-size: 20;color: antiquewhite;'>Score :</h7>  
+  <label id = 'score' style = 'font-size: 27;padding: 15;color:#000000'>0</label>
+</div>    
+
+<canvas id = "my" width = "700px" height ="20px" style = "margin-left: 34.3%;  border: 1px solid;color: blue;background-color: blue;"></canvas>
+    
+<canvas id = "mycanvas" width = "1008px" height ="504px" style = "padding: 1px;margin-left: 10%;margin-top: 0%;border:5px solid #000000;;color: blue;background-color: turquoise">
+</canvas>
+<script>
+    
+    document.getElementById('high_score').textContent = localStorage.getItem("high_score");
+    var ele =  document.getElementById('mycanvas');
+    if (ele && ele.getContext){
+    var context = ele.getContext('2d');
+    var array1 = [];
+    var array2 = [];
+    array1 [0] = 66;
+    array2 [0] = 154;
+    array1 [1] = 44;
+    array2 [1] = 154;
+    array1 [2] = 22;
+    array2 [2] = 154;
+    array1 [3] = 0;
+    array2 [3] = 154;
+    var limit1;
+    var score = 0;
+    var limit = 1;
+    var flag =0; 
+    var j =0;
+    var new_flag = df =0;
+    random_check = 0;
+    if(context){
+      context.fillStyle = 'black'
+      context.fillRect(array1[0],array2[0],20,20);
+      context.fillStyle = 'red'
+      context.fillRect(array1[1],array2[1],20,20);
+      context.fillRect(array1[2],array2[2],20,20);
+      context.fillRect(array1[3],array2[3],20,20);
+      }
+    }
+    var x= 0;
+    var score_bonus;
+    var element = document.getElementById('my')
+    if(element && element.getContext){
+      var ctx = element.getContext('2d');
+      if (ctx){
+      } 
+    }
+    var left_move;
+    var right_move;
+    var up_move;
+    var down_move;
+    var key;
+    var food ;
+    var random_x;
+    var random_y;
+    var left =0 ,right =0 ,down =0 ,up = 0;
+    var i = 0; 
+    var score_bonus;
+    var right1_move;
+
+
+    function set(){
+    right1_move = setInterval(rightMovement,80);
+
+         function rightMovement(){
+               key = 'right'
+                context.clearRect(array1[array1.length-1],array2[array2.length-1],20,20)
+                for(var i=array2.length-1;i>=0;i--){
+                array2[i] = array2[i-1]
+                array1[i] = array1[i-1]
+              }
+                array1[0]=array1[1]+22;
+                array2[0] = array2[1];
+                context.fillStyle = 'black'
+                context.fillRect(array1[0],array2[0],20,20)
+                for(var i=1;i<array1.length;i++){
+                context.fillStyle = 'red'
+                 context.fillRect(array1[i],array2[i],20,20)  
+                }
+          if (array1[0] == 1012){
+                window.alert('your score is '+score)
+               location.reload();
+          } 
+         }
+
+         random_x = 660;
+         random_y = 264;
+         context.fillStyle = 'green'
+                  
+        context.fillRect(random_x,random_y,20,20);
+
+    }
+
+    document.onkeydown = keyMovements;
+    function keyMovements(e){   
+        e = e || window.event;
+        var df = 22;                
+        console.log(random_x)
+        console.log(random_y)
+        clearInterval(right1_move)
+        if (i==0){
+          i = 1;
+        }
+
+        if(e.key == 'Escape')
+        {
+          console.log('hellllllllpppppppppppp')
+        right = left = down = up = 0;
+        if (left_move){
+          clearInterval(left_move);
+        } 
+        if(right_move){
+          clearInterval(right_move)
+        }
+        if(down_move){
+          clearInterval(down_move)
+        }
+        if(up_move){
+          clearInterval(up_move)
+        }
+
+        }        
+        if (e.keyCode == '37'){
+        up = 0;
+        right = 0;
+        down = 0;
+        left = left + 1;
+                if (left == 1){
+                clearInterval(left_move);
+                clearInterval(right_move)
+                } 
+                clearInterval(down_move)
+                clearInterval(up_move)
+
+        if (key == 'right' && left == 1){
+        right_move = setInterval(rightMovement,80);
+        }
+        else if (left == 1){
+        left_move = setInterval(leftMovement,80);
+        }
+        }
+
+        else if (e.keyCode == '38'){
+        left =0;
+        right =0;
+        down = 0;
+        up = up + 1;
+                clearInterval(left_move); 
+                clearInterval(right_move)
+                if (up == 1){
+                clearInterval(down_move)
+                clearInterval(up_move)
+                }
+        if(key == 'down' && up == 1){
+        down_move = setInterval(downMovement,80);
+        }
+        else if(up == 1){
+        up_move = setInterval(upMovement,80);
+        }
+        }
+
+        else if(e.keyCode == '39'){
+        up = 0;
+        left =0;
+        down = 0;
+        right = right+1;
+                if(right ==1 ){  
+                clearInterval(left_move);
+                clearInterval(right_move);
+                } 
+                clearInterval(down_move)
+                clearInterval(up_move)       
+        
+        if (key == 'left' && right == 1){
+        left_move = setInterval(leftMovement,80);
+        }
+        else if (right == 1){ 
+        right_move = setInterval(rightMovement,80);
+        }
+        }
+
+        else if (e.keyCode == '40'){
+        up = 0;
+        left = 0;
+        right =0;
+        down = down + 1;
+                clearInterval(left_move); 
+                clearInterval(right_move)
+                if (down == 1 ){
+                clearInterval(down_move)
+                clearInterval(up_move)
+                }
+        if (key == 'up' && down == 1){
+        up_move = setInterval(upMovement,80);
+        }
+        else if (down == 1 ){
+        down_move = setInterval(downMovement,80);
+        }
+        }
+
+
+        function food_eating(){
+          var x = Math.floor(Math.random()*(44-1+1))+1;
+          var y = Math.floor(Math.random()*(21-1+1))+1;
+           random_x = 22*x+0;
+           random_y = 22*y+0;
+           food_check()
+           limit1 = limit+1;
+           if (limit1%5 != 0){
+           context.fillStyle = 'green'
+           }
+           else{ 
+           context.fillStyle = 'blue'
+           }
+           context.fillRect(random_x,random_y,20,20);
+        }   
+        function food_check(){
+          for(i=0;i<=array1.length;i++){
+           console.log(array1[i])
+           if (random_x == array1[i]){
+             if (random_y == array2[i]){
+               food_eating();
+             }
+           }
+           else{
+             console.log('not existing')
+           }
+         }
+        }
+
+      function bonus_point(){
+            score_bonus = setInterval(bonus,80);
+        }
+        function bonus(){   
+           random_check = 1;
+           if(array1[0]==random_x && array2[0]==random_y && random_check ==1){
+              food_eating();
+              for(var h = x;h<=700;h= h+20){
+                ctx.clearRect(h,0,20,20);
+              }
+              x = 700;
+              array1.length = array1.length+1;
+              array2.length = array2.length+1;
+              score = score + 50;
+              limit = limit + 1;
+              document.getElementById('score').textContent = score ;
+           }
+           else{
+            ctx.clearRect(x,0,20,20);
+            x = x+20;
+           }
+            if (x == 700){
+              clearInterval(score_bonus)
+              console.log('flag is emitted')
+              flag = 0;
+              new_flag =1;
+              random_check = 0;
+              context.fillStyle = 'green'
+              context.fillRect(random_x,random_y,20,20);
+           }
+        }
+
+      function array_swapping(j){
+              for(var i=array2.length-j;i>=0;i--){
+                array2[i] = array2[i-1]
+                array1[i] = array1[i-1]
+              }
+      }
+
+      function snake_collision(){
+        for(i=1;i<=array2.length;i++){
+           if (array2[0] == array2[i]){
+             if (array1[0] == array1[i]){
+               window.alert('your score is '+score)
+               high_scores();
+               window.alert('collision detected')
+               location.reload();
+
+             }
+           }
+         }     
+      }
+
+      function high_scores(){
+        var high_score = localStorage.getItem("high_score");
+        if(high_score != null){
+          if(score>high_score){
+            localStorage.setItem('high_score',score);
+            high_score = score;
+          }
+        }
+        else{
+           localStorage.setItem('high_score',score);
+           high_score = score; 
+          }
+          document.getElementById('high_score').textContent = high_score ;
+        
+      }
+
+      function snake_body_filling(){
+        context.fillStyle = 'black'
+        context.fillRect(array1[0],array2[0],20,20)
+        for(var i=1;i<array1.length;i++){
+             context.fillStyle = 'red'
+             context.fillRect(array1[i],array2[i],20,20)
+          }
+      }
+
+      function food_process(){
+              food_eating();
+              array1.length = array1.length+1;
+              array2.length = array2.length+1;
+              score = score + 5;
+              limit = limit + 1;
+              document.getElementById('score').textContent = score ;
+      }
+
+    function bonus_process(){
+            x =0;
+            for (var i= 0; i<35;i++){
+            ctx.fillStyle = 'red'
+            ctx.fillRect(x,0,20,20);
+            x= x+20;
+            }
+            x= 0;
+            flag =1;
+            bonus_point();
+
+    }
+
+    function boundary_collision(){
+      window.alert('your score is '+score)
+      high_scores();
+      location.reload();
+    }
+  
+      function upMovement(){ 
+          key = 'up'
+          if (limit % 5 == 0 && flag == 0 && new_flag ==0){
+            bonus_process();
+          }        
+          if(array1[0]==random_x && array2[0]==random_y && random_check == 0){
+            food_process();
+          }         
+              context.clearRect(array1[array1.length-1],array2[array2.length-1],20,20)
+              array_swapping(1);
+              array1[0] = array1[1]
+              array2[0] = array2[1]-22;
+          snake_body_filling();
+         if(limit % 5 != 0){
+            new_flag =0;
+          }
+        snake_collision();
+            if (array2[0] == -22){
+              context.clearRect(array1[array1.length-1],array2[array2.length-1],20,20)
+              array_swapping(1);
+              array1[0] = array1[1]
+              array2[0] = 484;
+              snake_body_filling();
+            }
+          return;
+      }
+
+     function downMovement(){
+       key = 'down'
+          if (limit % 5 == 0 && flag == 0 && new_flag ==0){
+            bonus_process();
+          }
+          if(array1[0]==random_x && array2[0]==random_y && random_check == 0){
+            food_process();
+          }
+            context.clearRect(array1[array1.length-1],array2[array2.length-1],20,20)
+            array_swapping(1);
+            array2[0] = array2[1]+22;
+            array1[0] = array1[1];
+        snake_body_filling();
+         if(limit % 5 != 0){
+             new_flag =0;
+          }
+      snake_collision();  
+       if (array2[0] == 506){
+        context.clearRect(array1[array1.length-1],array2[array2.length-1],20,20)
+        array_swapping(1);
+        array1[0] = array1[1]
+        array2[0] = 0;
+        snake_body_filling();
+       }
+       return;
+     }
+
+     function leftMovement(){
+       key = 'left'
+       if (limit % 5 == 0 && flag == 0 && new_flag ==0){
+            bonus_process();
+          }
+       if(array1[0]==random_x && array2[0]==random_y && random_check == 0){
+            food_process();
+          }
+              context.clearRect(array1[array1.length-1],array2[array2.length-1],20,20)
+              array_swapping(1);
+              array1[0]=array1[1]-22;
+              array2[0] = array2[1];
+      snake_body_filling();
+      if(limit % 5 != 0){
+            new_flag =0;
+          }
+        snake_collision();  
+       if(array1[0] == -22){
+        context.clearRect(array1[array1.length-1],array2[array2.length-1],20,20)
+        array_swapping(1);
+        array2[0] = array2[1]
+        array1[0] = 990;
+        snake_body_filling();
+       }
+       return;
+     }
+
+     function rightMovement(){
+           key = 'right'
+           if (limit % 5 == 0 && flag == 0 && new_flag ==0){
+            bonus_process();
+          }
+          if(array1[0]==random_x && array2[0]==random_y && random_check == 0){
+            food_process();
+          }
+                context.clearRect(array1[array1.length-1],array2[array2.length-1],20,20)
+                array_swapping(1);
+                array1[0]=array1[1]+22;
+                array2[0] = array2[1];
+          snake_body_filling();
+          if(limit % 5 != 0){
+            new_flag = 0;
+          }
+          snake_collision();  
+          if (array1[0] == 1012){
+            context.clearRect(array1[array1.length-1],array2[array2.length-1],20,20)
+            array_swapping(1);
+            array2[0] = array2[1]
+            array1[0] = 0;
+            snake_body_filling();
+          } 
+        } 
+    }
+</script>
+</body>
+</html>

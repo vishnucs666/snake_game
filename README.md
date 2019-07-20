@@ -6,12 +6,21 @@ Snake game is a simple snake food eating game
 
 Any browser that supports JS and HTML 
 
-### Configurations:
+## TUTORIALS
+
+### Step 1: Draw the canvas using the html
+
+To draw a canvas use the <canvas>  tag . We are going to use a canvas with these inline css properties
+
+#### HTML
 
 ```
-cp config/config.yml.example to config/config.yml
-cp config/database.yml.example to config/database.yml
-cp config/secrets.yml.example to config/secrets.yml
+<body>
+
+<canvas id = "mycanvas" width = "1008px" height ="504px" style = "padding: 1px;margin-left: 10%;border:5px solid #000000;color: blue;background-color: turquoise">
+
+</body>
+
 ```
 
 ### Create a db user:

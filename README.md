@@ -194,7 +194,8 @@ In this step it will check the first element of the array is equal to the random
 ### Step 6 : snake collision
 
 ##### (i) snake body collisions:                                          
-                            While the length of the increases and when the snake head touches its body the snake dies.
+                           
+   While the length of the increases and when the snake head touches its body the snake dies.
 			  
 ```
 	function snake_body_collision(){
@@ -212,7 +213,8 @@ In this step it will check the first element of the array is equal to the random
 In this it will check the first element of the array is already containing in the array if so  means that the head is touched its body, so the game will end here.
 
 ##### (ii) Boundary collisions :
-                            when the snake touches the canvas left, right, down, up regions the snake dies.
+
+   when the snake touches the canvas left, right, down, up regions the snake dies.
 			    
 Consider the up movement case
 

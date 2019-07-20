@@ -85,5 +85,11 @@ console.log(“down arrow key is pressed”)
 ``````
 By using this code in each arrow key press it will show that which arrow key is pressed in the browsers web console.
 
+### Step 4 : Snake movement
+
+In this step move the snake to any position on a specified key press. This is the point where the snake movement logic comes.
+
+Consider this as the initial stage with the canvas having 25*25 grids and 4 snake body cells.
+
 
     

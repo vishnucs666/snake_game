@@ -60,4 +60,30 @@ In this array_x indicating the x coordinates and array_y is indicating the y coo
 
 After this we will get something like in the above picture.
 
+### Step3 : Understanding the key movements
+
+In this step find the arrow key movements and display it in the browsers web console. This is mainly to move the snake to a specified position.
+
+#### JS
+
+```
+document.onkeydown = keyMovements;
+function keyMovements(e){ 
+e = e || window.event;
+if (e.keyCode == '37'){
+console.log(“left arrow key is pressed”)
+}
+else if (e.keyCode == '38'){
+console.log(“up arrow key is presssed”)
+}
+else if(e.keyCode == '39'){
+console.log(“right arrow key is pressed”)
+}
+else if (e.keyCode == '40'){
+console.log(“down arrow key is pressed”)
+}
+```
+By using this code in each arrow key press it will show that which arrow key is pressed in the browsers web console.
+
+
     

@@ -95,4 +95,10 @@ Consider this as the initial stage with the canvas having 25*25 grids and snake 
 
 ![Screenshot from 2019-07-20 21-31-22](https://user-images.githubusercontent.com/26246256/61580963-c4824980-ab35-11e9-836f-fdb3ef76c9ac.png)
 
+![Screenshot from 2019-07-20 21-32-33](https://user-images.githubusercontent.com/26246256/61580993-09a67b80-ab36-11e9-9aab-3cb140177141.png)
+
+![Screenshot from 2019-07-20 21-32-44](https://user-images.githubusercontent.com/26246256/61580989-03b09a80-ab36-11e9-9157-a4e6a99363e8.png)
+
+![Screenshot from 2019-07-20 21-32-55](https://user-images.githubusercontent.com/26246256/61580985-fd222300-ab35-11e9-825e-363f8213fa38.png)
+
     

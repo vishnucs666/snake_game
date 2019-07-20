@@ -23,7 +23,7 @@ To draw a canvas use the <canvas>  tag . We are going to use a canvas with these
 
 ```
 
-####JS
+#### JS
 
 ```
 var ele = document.getElementById('mycanvas');

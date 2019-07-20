@@ -32,5 +32,7 @@ var ele = document.getElementById('mycanvas');
 
 This will draw a simple canvas with border 5px
 
+![Screenshot from 2019-07-20 20-41-14](https://user-images.githubusercontent.com/26246256/61580374-022fa400-ab2f-11e9-99a7-e3d299a6d937.png)
+
 
     

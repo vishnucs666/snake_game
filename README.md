@@ -20,7 +20,6 @@ To draw a canvas use the <canvas>  tag . We are going to use a canvas with these
 <canvas id = "mycanvas" width = "1008px" height ="504px" style = "padding: 1px;margin-left: 10%;border:5px solid #000000;color: blue;background-color: turquoise">
 
 </body>
-
 ```
 
 #### JS

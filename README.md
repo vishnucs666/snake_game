@@ -101,4 +101,54 @@ Consider this as the initial stage with the canvas having 25*25 grids and snake 
 
 ![Screenshot from 2019-07-20 21-57-17](https://user-images.githubusercontent.com/26246256/61581235-6eafa080-ab39-11e9-8913-ce26f9e16bbf.png)
 
+Since we are usign array, finding the positions of the snake is not that much difficult.
+
+#####Up movement
+
+```
+<script>
+if (e.keyCode == '38'){
+up_move = setInterval(upMovement,100);
+}
+function upMovement(){ 
+	context.clearRect(array_x[array_x.length-1],array_y[array_y.length-1],20,20)
+	for(var i=array_y.length-1;i>=0;i--){
+		array_y[i] = array_y[i-1]
+		array_x[i] = array_x[i-1]
+	}
+	array_x[0] = array_x[1]
+	array_y[0] = array_y[1]-22;
+	for(var i=0;i<array_x.length;i++){
+		context.fillStyle = 'red'
+		context.fillRect(array_x[i],array_y[i],20,20)
+	} 
+return;
+}
+
+</script>
+```
+
+In this when the up arrow key is pressed it will call an setInterval method
+
+ie the setInterval method calls a function at specified intervals . The setInterval method is continue calling the function until the clearInterval method is called.
+
+In this case when the up arrow key is pressed it will trigger upMovement method by setInterval in each 100 milliseconds. 
+
+Ie in the upMovement method first it will delete the last element then swap all the remaining elements to one position down  and then add the new element(snake head cell position coordinates) to the first position of the array.
+
+In case of upmovement the y coordinate is decreased and the x is constant
+
+```
+       array_y[0] = array_y[1]-22;
+```
+
+vice versa in other positions there is only a smaller differents in the code.
+
+```
+##### down movement    :  The y coordiante is increased and x is constant.
+##### left movement    :  The x coordinate is decreased and y is constant.
+##### right movement   :  The x coordinate is increased and y is constant.
+```
+
+
     

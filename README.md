@@ -32,5 +32,31 @@ This will draw a simple canvas with border 5px
 
 ![Screenshot from 2019-07-20 20-41-14](https://user-images.githubusercontent.com/26246256/61580374-022fa400-ab2f-11e9-99a7-e3d299a6d937.png)
 
+### Step 2: Drawing on the canvas
+
+```
+var ele = document.getElementById('mycanvas');
+var context = ele.getContext('2d');
+```
+Consider the snake body part as piece of rectangles so we just need to draw rectangles inside the canvas 
+inside the canvas each position is indicated by some x,y coordinates so instead of giving the coordinates directly store each coordinates inside an array this will make the job easy for you. What i was done is to store x coordinates inside an array and store y coordinates in to an another array
+
+```
+if(context){
+context.fillStyle = 'black'
+context.fillRect(array_x[0],array_y[0],20,20);
+context.fillStyle = 'red'
+context.fillRect(array_x[1],array_y[1],20,20);
+context.fillRect(array_x[2],array_y[2],20,20);
+context.fillRect(array_x[3],array_y[3],20,20);
+}
+}
+```
+
+In this array_x indicating the x coordinates and array_y is indicating the y coordinates.
+
+![Screenshot from 2019-07-20 20-51-35](https://user-images.githubusercontent.com/26246256/61580486-58e9ad80-ab30-11e9-9481-1a15f6618a86.png)
+
+After this we will get something like in the above picture.
 
     

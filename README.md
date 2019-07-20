@@ -103,7 +103,7 @@ Consider this as the initial stage with the canvas having 25*25 grids and snake 
 
 Since we are usign array, finding the positions of the snake is not that much difficult.
 
-#####Up movement
+##### Up movement
 
 ```
 <script>
@@ -145,9 +145,9 @@ In case of upmovement the y coordinate is decreased and the x is constant
 vice versa in other positions there is only a smaller differents in the code.
 
 ```
-##### down movement    :  The y coordiante is increased and x is constant.
-##### left movement    :  The x coordinate is decreased and y is constant.
-##### right movement   :  The x coordinate is increased and y is constant.
+  down movement  :  The y coordiante is increased and x is constant.
+  left movement  :  The x coordinate is decreased and y is constant.
+  right movement :  The x coordinate is increased and y is constant.
 ```
 
 

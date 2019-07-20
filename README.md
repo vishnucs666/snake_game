@@ -91,5 +91,7 @@ In this step move the snake to any position on a specified key press. This is th
 
 Consider this as the initial stage with the canvas having 25*25 grids and snake having 4 body cells.
 
+![Screenshot from 2019-07-20 21-19-35](https://user-images.githubusercontent.com/26246256/61580871-643ed800-ab34-11e9-8e3c-a0ede1c374da.png)
+
 
     

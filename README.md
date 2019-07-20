@@ -38,7 +38,8 @@ This will draw a simple canvas with border 5px
 var ele = document.getElementById('mycanvas');
 var context = ele.getContext('2d');
 ```
-Consider the snake body part as piece of rectangles so we just need to draw rectangles inside the canvas 
+Consider the snake body part as piece of rectangles so we just need to draw rectangles inside the canvas.
+
 inside the canvas each position is indicated by some x,y coordinates so instead of giving the coordinates directly store each coordinates inside an array this will make the job easy for you. What i was done is to store x coordinates inside an array and store y coordinates in to an another array
 
 ```

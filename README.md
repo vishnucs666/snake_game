@@ -22,17 +22,4 @@ To draw a canvas use the <canvas>  tag . We are going to use a canvas with these
 </body>
 
 ```
-
-### Create a db user:
-
-```
-$ sudo -u postgres createuser tnps -d
-$ sudo -u postgres psql -c "alter user tnps with password 'tnps123';"
-```
-
-### DB Setup:
-
-```
-bundle exec rake db:setup
-```
     

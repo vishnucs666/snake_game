@@ -1,0 +1,76 @@
+<html>
+<head>  
+
+</head>
+<style>
+   h1{ 
+     margin-left: 42%;
+     color: #000000;
+     font-size: 27;
+   }
+   .ml-left{
+     margin-left: 85%;
+   }
+   .font-size-lb{
+     font-size : 20;
+   }
+   .color{
+     color:antiquewhite;
+   }
+   .score-font{
+    font-size: 27;
+   }
+   .score-color{
+    color: #000000';
+   }
+   .padding{
+    padding: 15
+   }
+   .margin-left{
+    margin-left: 34.3%;
+   } 
+   .border{
+    border: 1px solid;
+   }
+   .canvas-color{
+    color: blue;
+   }
+   .background-color{
+    background-color: blue;
+   }
+   .canvas-padding{
+    padding: 1px;
+   }
+   .canvas-margin-left{
+    margin-left: 10%;
+   }
+   .canvas-border{
+    border:5px solid #000000;
+   }
+   .canvas-color{
+    color: blue;
+   }
+   .canvas-background-color{
+    background-color: turquoise;
+   }
+ </style>
+
+<body style="background-color:blue" onload="set()">
+   <b> <h1>SNAKE XENZIA</h1>
+   </b>
+<div>
+  <label class = "ml-left font-size-lb color">High Score :</label>  
+  <b><label id = 'high-score' class = "score-font score-color padding"><b>0</b></label></b>
+</div>
+<div>
+  <label class = "ml-left font-size-lb color">Score :</label>  
+  <label id = 'score' class = "score-font score-color padding">0</label>
+</div>    
+
+<canvas id = "bonus" width = "700px" height ="20px" class = "margin-left border canvas-color background-color"></canvas>
+    
+<canvas id = "snake-game-canvas" width = "1008px" height ="504px" class = "canvas-padding canvas-margin-left canvas-color canvas-border canvas-background-color">
+</canvas>
+<script type="text/javascript" src = "snake_game_real_modified.js"> </script>
+</body>
+</html>

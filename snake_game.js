@@ -19,6 +19,7 @@ if (ele && ele.getContext) {
   var flag = 0;
   var j = 0;
   var new_flag = df = 0;
+  var direction = 'right'
   random_check = 0;
   if (context) {
     context.fillStyle = 'black'
@@ -47,35 +48,26 @@ var left = 0, right = 0, down = 0, up = 0;
 var i = 0;
 var score_bonus;
 var right1_move;
+// var direction = ['up','down','right',39,40,39]//[39,38,40] left = 37
+
 
 function set() {
-  right1_move = setInterval(rightMovement, 80);
-  function rightMovement() {
-    key = 'right'
-    context.clearRect(array1[array1.length - 1], array2[array2.length - 1], 20, 20)
-    for (var i = array2.length - 1; i >= 0; i--) {
-      array2[i] = array2[i - 1]
-      array1[i] = array1[i - 1]
-    }
-    array1[0] = array1[1] + 22;
-    array2[0] = array2[1];
-    context.fillStyle = 'black'
-    context.fillRect(array1[0], array2[0], 20, 20)
-    for (var i = 1; i < array1.length; i++) {
-      context.fillStyle = 'red'
-      context.fillRect(array1[i], array2[i], 20, 20)
-    }
-    if (array1[0] == 1012) {
-      window.alert('your score is ' + score)
-      location.reload();
-    }
-    return;
-  }
-
   random_x = 660;
   random_y = 264;
   context.fillStyle = 'green'
   context.fillRect(random_x, random_y, 20, 20);
+  right1_move = setInterval(rightMovement, 80);
+  function rightMovement() {
+    key = 'right'
+    context.clearRect(array1[array1.length - 1], array2[array2.length - 1], 20, 20)
+    array_swapping(1);
+    array1[0] = array1[1] + 22;
+    array2[0] = array2[1];
+    snake_body_filling();
+    snake_collision();
+    boundary_collisions();
+    return;
+  }
   return;
 }
 
@@ -103,68 +95,67 @@ function keyMovements(e) {
     clearInterval(secondmove);
   }
 
-  if (e.keyCode == '37') {
-    up = right = down = 0;
-    left = left + 1;
-    if (left == 1) {
-      movementClearInterval(left_move, right_move)
-    }
-    movementClearInterval(down_move, up_move)
-    if (key == 'right' && left == 1) {
-      right_move = setInterval(Movement, 80);
-    }
-    else if (left == 1) {
-      key = 'left'
-      left_move = setInterval(Movement, 80);
-    }
-  }
-
-  else if (e.keyCode == '38') {
-    left = right = down = 0;
-    up = up + 1;
-    movementClearInterval(left_move, right_move)
-    if (up == 1) {
+  switch (e.keyCode) {
+    case 37:
+      up = right = down = 0;
+      left = left + 1;
+      if (left == 1) {
+        movementClearInterval(left_move, right_move)
+      }
       movementClearInterval(down_move, up_move)
-    }
-    if (key == 'down' && up == 1) {
-      down_move = setInterval(Movement, 80);
-    }
-    else if (up == 1) {
-      key = 'up'
-      up_move = setInterval(Movement, 80);
-    }
-  }
-
-  else if (e.keyCode == '39') {
-    up = left = down = 0;
-    right = right + 1;
-    if (right == 1) {
-      movementClearInterval(left_move, right_move)
-    }
-    movementClearInterval(down_move, up_move)
-    if (key == 'left' && right == 1) {
-      left_move = setInterval(Movement, 80);
-    }
-    else if (right == 1) {
-      key = 'right'
-      right_move = setInterval(Movement, 80);
-    }
-  }
-
-  else if (e.keyCode == '40') {
-    up = left = right = 0;
-    down = down + 1;
-    movementClearInterval(left_move, right_move)
-    if (down == 1) {
+      if (direction == 'right' && left == 1) {
+        right_move = setInterval(Movement, 80);
+      }
+      else if (left == 1) {
+        key = 'left'
+        left_move = setInterval(Movement, 80);
+      }
+      break;
+    case 39:
+      up = left = down = 0;
+      right = right + 1;
+      if (right == 1) {
+        movementClearInterval(left_move, right_move)
+      }
       movementClearInterval(down_move, up_move)
-    }
-    if (key == 'up' && down == 1) {
-      up_move = setInterval(Movement, 80);
-    }
-    else if (down == 1) {
-      key = 'down';
-      down_move = setInterval(Movement, 80);
-    }
+      if (direction == 'left' && right == 1) {
+        left_move = setInterval(Movement, 80);
+      }
+      else if (right == 1) {
+        key = 'right'
+        right_move = setInterval(Movement, 80);
+      }
+      break;
+    case 38:
+      left = right = down = 0;
+      up = up + 1;
+      movementClearInterval(left_move, right_move)
+      if (up == 1) {
+        movementClearInterval(down_move, up_move)
+      }
+      if (direction == 'down' && up == 1) {
+        down_move = setInterval(Movement, 80);
+      }
+      else if (up == 1) {
+        key = 'up'
+        up_move = setInterval(Movement, 80);
+      }
+      break;
+    case 40:
+      up = left = right = 0;
+      down = down + 1;
+      movementClearInterval(left_move, right_move)
+      if (down == 1) {
+        movementClearInterval(down_move, up_move)
+      }
+      if (direction == 'up' && down == 1) {
+        up_move = setInterval(Movement, 80);
+      }
+      else if (down == 1) {
+        key = 'down';
+        down_move = setInterval(Movement, 80);
+      }
+      break;
   }
 
   function Movement() {
@@ -177,18 +168,22 @@ function keyMovements(e) {
     context.clearRect(array1[array1.length - 1], array2[array2.length - 1], 20, 20)
     array_swapping(1);
     if (key == 'right') {
+      direction = 'right'
       array1[0] = array1[1] + 22;
       array2[0] = array2[1];
     }
     else if (key == 'left') {
+      direction = 'left'
       array1[0] = array1[1] - 22;
       array2[0] = array2[1];
     }
     else if (key == 'down') {
+      direction = 'down'
       array2[0] = array2[1] + 22;
       array1[0] = array1[1];
     }
     else if (key == 'up') {
+      direction = 'up'
       array1[0] = array1[1]
       array2[0] = array2[1] - 22;
     }
@@ -202,7 +197,6 @@ function keyMovements(e) {
   }
   return;
 }
-
 function boundary_collisions() {
   if (array1[0] == 1012) {
     boundary_collision();

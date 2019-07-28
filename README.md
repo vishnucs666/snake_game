@@ -5,9 +5,6 @@ Snake game is a simple snake food eating game
 ## Dependancies
 Any web browser ie google chrome,mozilla etc.
 
-## Use
-Use the navigation.html, boundary.html and test.html for running the snake game. Open the navigation.html in any web browser that contains all the other details to run the snake game. 
-
 ## TUTORIALS
 
 ### Step 1: Draw the canvas using the html

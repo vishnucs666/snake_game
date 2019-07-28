@@ -3,16 +3,16 @@ document.getElementById('high-score').textContent = localStorage.getItem("high-s
 var ele = document.getElementById('snake-game-canvas');
 if (ele && ele.getContext) {
   var context = ele.getContext('2d');
-  var array1 = [];
-  var array2 = [];
-  array1[0] = 66;
-  array2[0] = 154;
-  array1[1] = 44;
-  array2[1] = 154;
-  array1[2] = 22;
-  array2[2] = 154;
-  array1[3] = 0;
-  array2[3] = 154;
+  var array_x = [];
+  var array_y = [];
+  array_x[0] = 66;
+  array_y[0] = 154;
+  array_x[1] = 44;
+  array_y[1] = 154;
+  array_x[2] = 22;
+  array_y[2] = 154;
+  array_x[3] = 0;
+  array_y[3] = 154;
   var limit1;
   var score = 0;
   var limit = 1;
@@ -23,11 +23,11 @@ if (ele && ele.getContext) {
   random_check = 0;
   if (context) {
     context.fillStyle = 'black'
-    context.fillRect(array1[0], array2[0], 20, 20);
+    context.fillRect(array_x[0], array_y[0], 20, 20);
     context.fillStyle = 'red'
-    context.fillRect(array1[1], array2[1], 20, 20);
-    context.fillRect(array1[2], array2[2], 20, 20);
-    context.fillRect(array1[3], array2[3], 20, 20);
+    context.fillRect(array_x[1], array_y[1], 20, 20);
+    context.fillRect(array_x[2], array_y[2], 20, 20);
+    context.fillRect(array_x[3], array_y[3], 20, 20);
   }
 }
 var x = 0;
@@ -58,11 +58,11 @@ function set() {
   context.fillRect(random_x, random_y, 20, 20);
   right1_move = setInterval(rightMovement, 80);
   function rightMovement() {
-    key = 'right'
-    context.clearRect(array1[array1.length - 1], array2[array2.length - 1], 20, 20)
+    direction = 'right'
+    context.clearRect(array_x[array_x.length - 1], array_y[array_y.length - 1], 20, 20)
     array_swapping(1);
-    array1[0] = array1[1] + 22;
-    array2[0] = array2[1];
+    array_x[0] = array_x[1] + 22;
+    array_y[0] = array_y[1];
     snake_body_filling();
     snake_collision();
     boundary_collisions();
@@ -162,30 +162,30 @@ function keyMovements(e) {
     if (limit % 5 == 0 && flag == 0 && new_flag == 0) {
       bonus_process();
     }
-    if (array1[0] == random_x && array2[0] == random_y && random_check == 0) {
+    if (array_x[0] == random_x && array_y[0] == random_y && random_check == 0) {
       food_process();
     }
-    context.clearRect(array1[array1.length - 1], array2[array2.length - 1], 20, 20)
+    context.clearRect(array_x[array_x.length - 1], array_y[array_y.length - 1], 20, 20)
     array_swapping(1);
     if (key == 'right') {
+      array_x[0] = array_x[1] + 22;
+      array_y[0] = array_y[1];
       direction = 'right'
-      array1[0] = array1[1] + 22;
-      array2[0] = array2[1];
     }
     else if (key == 'left') {
+      array_x[0] = array_x[1] - 22;
+      array_y[0] = array_y[1];
       direction = 'left'
-      array1[0] = array1[1] - 22;
-      array2[0] = array2[1];
     }
     else if (key == 'down') {
+      array_y[0] = array_y[1] + 22;
+      array_x[0] = array_x[1];
       direction = 'down'
-      array2[0] = array2[1] + 22;
-      array1[0] = array1[1];
     }
     else if (key == 'up') {
+      array_x[0] = array_x[1]
+      array_y[0] = array_y[1] - 22;
       direction = 'up'
-      array1[0] = array1[1]
-      array2[0] = array2[1] - 22;
     }
     snake_body_filling();
     if (limit % 5 != 0) {
@@ -198,16 +198,16 @@ function keyMovements(e) {
   return;
 }
 function boundary_collisions() {
-  if (array1[0] == 1012) {
+  if (array_x[0] == 1012) {
     boundary_collision();
   }
-  if (array2[0] == -22) {
+  if (array_y[0] == -22) {
     boundary_collision();
   }
-  if (array2[0] == 506) {
+  if (array_y[0] == 506) {
     boundary_collision();
   }
-  if (array1[0] == -22) {
+  if (array_x[0] == -22) {
     boundary_collision();
   }
   return;
@@ -230,10 +230,10 @@ function food_eating() {
   return;
 }
 function food_check() {
-  for (i = 0; i <= array1.length; i++) {
-    console.log(array1[i])
-    if (random_x == array1[i]) {
-      if (random_y == array2[i]) {
+  for (i = 0; i <= array_x.length; i++) {
+    console.log(array_x[i])
+    if (random_x == array_x[i]) {
+      if (random_y == array_y[i]) {
         food_eating();
       }
     }
@@ -250,14 +250,14 @@ function bonus_point() {
 }
 function bonus() {
   random_check = 1;
-  if (array1[0] == random_x && array2[0] == random_y && random_check == 1) {
+  if (array_x[0] == random_x && array_y[0] == random_y && random_check == 1) {
     food_eating();
     for (var h = x; h <= 700; h = h + 20) {
       ctx.clearRect(h, 0, 20, 20);
     }
     x = 700;
-    array1.length = array1.length + 1;
-    array2.length = array2.length + 1;
+    array_x.length = array_x.length + 1;
+    array_y.length = array_y.length + 1;
     score = score + 50;
     limit = limit + 1;
     document.getElementById('score').textContent = score;
@@ -279,17 +279,17 @@ function bonus() {
 }
 
 function array_swapping(j) {
-  for (var i = array2.length - j; i >= 0; i--) {
-    array2[i] = array2[i - 1]
-    array1[i] = array1[i - 1]
+  for (var i = array_y.length - j; i >= 0; i--) {
+    array_y[i] = array_y[i - 1]
+    array_x[i] = array_x[i - 1]
   }
   return;
 }
 
 function snake_collision() {
-  for (i = 1; i <= array2.length; i++) {
-    if (array2[0] == array2[i]) {
-      if (array1[0] == array1[i]) {
+  for (i = 1; i <= array_y.length; i++) {
+    if (array_y[0] == array_y[i]) {
+      if (array_x[0] == array_x[i]) {
         window.alert('your score is ' + score)
         high_scores();
         window.alert('collision detected')
@@ -319,18 +319,18 @@ function high_scores() {
 
 function snake_body_filling() {
   context.fillStyle = 'black'
-  context.fillRect(array1[0], array2[0], 20, 20)
-  for (var i = 1; i < array1.length; i++) {
+  context.fillRect(array_x[0], array_y[0], 20, 20)
+  for (var i = 1; i < array_x.length; i++) {
     context.fillStyle = 'red'
-    context.fillRect(array1[i], array2[i], 20, 20)
+    context.fillRect(array_x[i], array_y[i], 20, 20)
   }
   return;
 }
 
 function food_process() {
   food_eating();
-  array1.length = array1.length + 1;
-  array2.length = array2.length + 1;
+  array_x.length = array_x.length + 1;
+  array_y.length = array_y.length + 1;
   score = score + 5;
   limit = limit + 1;
   document.getElementById('score').textContent = score;

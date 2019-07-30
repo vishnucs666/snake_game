@@ -75,6 +75,7 @@ function set() {
 }
 key = 'right'
 document.onkeydown = keyMovements;
+
 function keyMovements(e) {
   e = e || window.event;
   var df = 22;
@@ -149,32 +150,33 @@ function keyMovements(e) {
       break;
   }
 
-  function Movement() {
-    if (limit % 5 == 0 && flag == 0 && new_flag == 0) {
-      bonus_process();
-    }
-    if (array_x[0] == random_x && array_y[0] == random_y && random_check == 0) {
-      food_process();
-    }
-    context.clearRect(array_x[array_x.length - 1],array_y[array_y.length - 1],20,20);
-    array_swapping(1);
-    if (key == "right") {
-      right_movement_process();
-    } else if (key == "left") {
-      left_movement_process();
-    } else if (key == "down") {
-      down_movement_process();
-    } else if (key == "up") {
-      up_movement_process();
-    }
-    snake_body_filling();
-    if (limit % 5 != 0) {
-      new_flag = 0;
-    }
-    snake_collision();
-    boundary_collisions();
-    return;
+  return;
+}
+
+function Movement() {
+  if (limit % 5 == 0 && flag == 0 && new_flag == 0) {
+    bonus_process();
   }
+  if (array_x[0] == random_x && array_y[0] == random_y && random_check == 0) {
+    food_process();
+  }
+  context.clearRect(array_x[array_x.length - 1],array_y[array_y.length - 1],20,20);
+  array_swapping(1);
+  if (key == "right") {
+    right_movement_process();
+  } else if (key == "left") {
+    left_movement_process();
+  } else if (key == "down") {
+    down_movement_process();
+  } else if (key == "up") {
+    up_movement_process();
+  }
+  snake_body_filling();
+  if (limit % 5 != 0) {
+    new_flag = 0;
+  }
+  snake_collision();
+  boundary_collisions();
   return;
 }
 

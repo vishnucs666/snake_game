@@ -87,6 +87,7 @@ function keyMovements(e) {
   function movementClearInterval(firstmove, secondmove) {
     clearInterval(firstmove);
     clearInterval(secondmove);
+    return;
   }
 
   switch (e.keyCode) {
@@ -97,7 +98,7 @@ function keyMovements(e) {
         movementClearInterval(left_move, right_move);
       }
       movementClearInterval(down_move, up_move);
-      if (key == "right" && left == 1) {
+      if (direction == "right" && left == 1) {
         right_move = setInterval(Movement, 80);
       } else if (left == 1) {
         key = "left";
@@ -111,7 +112,7 @@ function keyMovements(e) {
         movementClearInterval(left_move, right_move);
       }
       movementClearInterval(down_move, up_move);
-      if (key == "left" && right == 1) {
+      if (direction == "left" && right == 1) {
         left_move = setInterval(Movement, 80);
       } else if (right == 1) {
         key = "right";
@@ -125,7 +126,7 @@ function keyMovements(e) {
       if (up == 1) {
         movementClearInterval(down_move, up_move);
       }
-      if (key == "down" && up == 1) {
+      if (direction == "down" && up == 1) {
         down_move = setInterval(Movement, 80);
       } else if (up == 1) {
         key = "up";
@@ -135,20 +136,16 @@ function keyMovements(e) {
     case 40:
       up = left = right = 0;
       down = down + 1;
-
       movementClearInterval(left_move, right_move);
-
       if (down == 1) {
         movementClearInterval(down_move, up_move);
       }
-
-      if (key == "up" && down == 1) {
+      if (direction == "up" && down == 1) {
         up_move = setInterval(Movement, 80);
       } else if (down == 1) {
         key = "down";
         down_move = setInterval(Movement, 80);
       }
-
       break;
   }
 
@@ -159,12 +156,7 @@ function keyMovements(e) {
     if (array_x[0] == random_x && array_y[0] == random_y && random_check == 0) {
       food_process();
     }
-    context.clearRect(
-      array_x[array_x.length - 1],
-      array_y[array_y.length - 1],
-      20,
-      20
-    );
+    context.clearRect(array_x[array_x.length - 1],array_y[array_y.length - 1],20,20);
     array_swapping(1);
     if (key == "right") {
       right_movement_process();
@@ -187,24 +179,28 @@ function keyMovements(e) {
 }
 
 function right_movement_process(){
+  direction = "right";
   array_x[0] = array_x[1] + 22;
   array_y[0] = array_y[1];
-  direction = "right";
+  return;
 }
 function left_movement_process(){
+  direction = "left";
   array_x[0] = array_x[1] - 22;
   array_y[0] = array_y[1];
-  direction = "left";
+  return;
 }
 function down_movement_process(){
+  direction = "down";
   array_y[0] = array_y[1] + 22;
   array_x[0] = array_x[1];
-  direction = "down";
+  return;
 }
 function up_movement_process(){
+  direction = "up";
   array_x[0] = array_x[1];
   array_y[0] = array_y[1] - 22;
-  direction = "up";
+  return;
 }
 function boundary_collisions() {
   if (array_x[0] == 1012) {
